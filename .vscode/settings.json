@@ -1,0 +1,6 @@
+{
+    "terminal.integrated.env.osx": {
+        "PATH": "/Users/reuben/.platformio/penv/bin:/Users/reuben/.platformio/penv:/Users/reuben/.nvm/versions/node/v11.6.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "PLATFORMIO_CALLER": "vscode"
+    }
+}
