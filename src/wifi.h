@@ -1,2 +1,2 @@
-extern void initialiseWifi(int& globalBrightness, boolean& enabled);
+extern void initialiseWifi(ConfigurableSettings& settings);
 extern void loopWifi();

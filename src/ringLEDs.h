@@ -6,6 +6,8 @@ struct RingLED {
     Ring ring;
 };
 
-extern CRGB allLEDs[];
-extern std::vector<RingLED> ringLEDs;
+extern CRGB rawLEDs[];
+extern std::vector<RingLED> innerLEDs;
+extern std::vector<RingLED> outerLEDs;
+extern std::vector<RingLED> allLEDs;
 extern void initialiseLEDs(int brightness);
