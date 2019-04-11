@@ -6,7 +6,7 @@
 #include <Arduino.h>
 #include <FastLED.h>
 
-#include "ringLEDs.h"
+#include "allLEDs.h"
 #include "wifi.h"
 
 float fps = 1000 / 60;
@@ -47,7 +47,7 @@ void loop() {
     if(millis() >= lastExecutionBrightness + (hold ? hold : fps)){
       hold = 0;
 
-      for(int i = 12; i < 20; i++) allLEDs[i] = CHSV(0, 0, 255 - adjustedBrightness);
+      for(int i = 12; i < 20; i++) rawLEDs[i] = CHSV(0, 0, 255 - adjustedBrightness);
 
       if(brightness >= maxBrightness) {hold = 2750; mode = -1;}
       if(brightness <= minBrightness) {hold = 1750; mode = +1;}
@@ -60,10 +60,10 @@ void loop() {
 
     if(millis() >= lastExecutionColour + fps){
       for(int i = 0; i < 12; i++) {
-    		float ledOffset = (*std::find_if(ringLEDs.begin(), ringLEDs.end(), [&index = i](const RingLED& m) -> bool { return m.index == index;})).angle;
+    		float ledOffset = (*std::find_if(allLEDs.begin(), allLEDs.end(), [&index = i](const RingLED& m) -> bool { return m.index == index;})).angle;
     		float hue = fmod(ledOffset + colourOffset, maxOffset) * maxHue;
 
-    		allLEDs[i] = CHSV(hue, 255, adjustedBrightness);
+    		rawLEDs[i] = CHSV(hue, 255, adjustedBrightness);
     	}
 
     	colourOffset = fmod(colourOffset + colourOffsetIncrement, maxOffset);
@@ -77,8 +77,8 @@ void loop() {
     if(millis() >= lastExecutionBrightness + fps){
 
       for(int i = 0; i < 20; i++) {
-        CHSV current = rgb2hsv_approximate(allLEDs[i]);
-        allLEDs[i] = CHSV(current.h, current.s, min(255, max(0, int(floor(brightness)))));
+        CHSV current = rgb2hsv_approximate(rawLEDs[i]);
+        rawLEDs[i] = CHSV(current.h, current.s, min(255, max(0, int(floor(brightness)))));
       }
 
       brightness -= dimmingIncrement;

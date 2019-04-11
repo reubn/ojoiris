@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <FastLED.h>
 
-#include "ringLEDs.h"
+#include "allLEDs.h"
 #include "wifi.h"
 
 int globalBrightness = 255;
@@ -21,9 +21,9 @@ void loop() {
   loopWifi();
 
 	static float offset = 0;
-	for(int i = 0; i < ringLEDs.size(); i++) {
-		float ledOffset = (*std::find_if(ringLEDs.begin(),
-             ringLEDs.end(),
+	for(int i = 0; i < allLEDs.size(); i++) {
+		float ledOffset = (*std::find_if(allLEDs.begin(),
+             allLEDs.end(),
              [&index = i]
              (const RingLED& m) -> bool { return m.index == index;})).angle;
 
@@ -31,7 +31,7 @@ void loop() {
 		float hue = fmod(pos + offset, 1) * 255;
 		CRGB tempRGB = CHSV(hue, 255, globalBrightness);
     int use = tempRGB.r;
-    allLEDs[i] = CRGB(use, use, use);
+    rawLEDs[i] = CRGB(use, use, use);
 	}
 	offset = fmod(offset + 0.002f, 1.00f);
 	FastLED.show();

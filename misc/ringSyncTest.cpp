@@ -21,12 +21,12 @@ struct RingLED {
     float angle;
 };
 
-std::vector<RingLED> ringLEDs{
+std::vector<RingLED> allLEDs{
 	{0, 0.917}, {1, 0}, {2, 0.083}, {3, 0.167}, {4, 0.25}, {5, 0.333}, {6, 0.417}, {7, 0.5}, {8, 0.583}, {9, 0.667}, {10, 0.75}, {11, 0.833},
 	{12, 0.125}, {13, 0.25}, {14, 0.375}, {15, 0.5}, {16, 0.625}, {17, 0.75}, {18, 0.875}, {19, 0}
 };
 
-std::vector<RingLED> sortedLEDs(ringLEDs.size());
+std::vector<RingLED> sortedLEDs(allLEDs.size());
 
 bool sortByAngle(const RingLED& a, const RingLED& b)
 {
@@ -40,7 +40,7 @@ void setup() {
 	Serial.begin(9600);
 	Serial.println("resetting");
 
-  sortedLEDs = ringLEDs;
+  sortedLEDs = allLEDs;
   std::sort(sortedLEDs.begin(), sortedLEDs.end(), sortByAngle);
 
 	LEDS.addLeds<WS2812, DATA_PIN, GRB>(leds_total, NUM_LEDS_TOTAL);
@@ -58,7 +58,7 @@ void loop() {
     }
     else leds_total[i.index] = CHSV(0, 0, 0);
 }
-	position = (position + 1) % ringLEDs.size();
+	position = (position + 1) % allLEDs.size();
 	FastLED.show();
 	FastLED.delay(1000 / 2);
 	// static int led = 0;

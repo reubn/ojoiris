@@ -5,7 +5,7 @@
 #include <Arduino.h>
 #include <FastLED.h>
 
-#include "ringLEDs.h"
+#include "allLEDs.h"
 #include "wifi.h"
 
 float fps = 1000 / 60;
@@ -29,11 +29,11 @@ void loop() {
 
   if(millis() >= lastExecution + fps){
     LEDS.setBrightness(globalBrightness);
-    for(int i = 0; i < ringLEDs.size(); i++) {
-  		float ledOffset = (*std::find_if(ringLEDs.begin(), ringLEDs.end(), [&index = i](const RingLED& m) -> bool { return m.index == index;})).angle;
+    for(int i = 0; i < allLEDs.size(); i++) {
+  		float ledOffset = (*std::find_if(allLEDs.begin(), allLEDs.end(), [&index = i](const RingLED& m) -> bool { return m.index == index;})).angle;
   		float hue = fmod(ledOffset + offset, maxOffset) * maxHue;
 
-  		allLEDs[i] = CHSV(hue, 255, 255);
+  		rawLEDs[i] = CHSV(hue, 255, 255);
   	}
   	offset = fmod(offset + offsetIncrement, maxOffset);
   	FastLED.show();
