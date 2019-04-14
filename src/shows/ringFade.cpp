@@ -4,13 +4,17 @@
 #include <Arduino.h>
 #include <FastLED.h>
 
-#include "ringLEDs.hpp"
+#include "../main.hpp"
+#include "../ringLEDs/main.hpp"
 
-void ringFade(ConfigurableSettings& settings) {
+#include "ringFade.hpp"
+
+void loopRingFade(ConfigurableSettings& settings) {
+  static unsigned long lastExecution = 0;
 	static int brightness = 10;
 	static int mode = 1;
 
-  if(millis() >= lastExecutionBrightness + settings.fps){
+  if(millis() >= lastExecution + settings.fps){
     for(auto& ringLED : outerLEDs) rawLEDs[ringLED.index] = CHSV(0, 0, brightness);
     for(auto& ringLED : innerLEDs) rawLEDs[ringLED.index] = CHSV(0, 0, 255 - brightness);
 

@@ -5,8 +5,8 @@
 #include <Arduino.h>
 #include <FastLED.h>
 
-#include "allLEDs.h"
-#include "wifi.h"
+#include "allLEDs.hpp"
+#include "wifi.hpp"
 
 float fps = 1000 / 60;
 float maxHue = 255;

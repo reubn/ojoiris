@@ -2,7 +2,7 @@
 
 #include <FastLED.h>
 
-#include "ringLEDs.h"
+#include "main.hpp"
 
 #define DATA_PIN 2
 

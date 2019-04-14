@@ -1,3 +1,7 @@
+#include <vector>
+
+#include <FastLED.h>
+
 enum Ring {inner, outer};
 
 struct RingLED {

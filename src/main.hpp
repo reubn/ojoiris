@@ -13,7 +13,9 @@ struct ConfigurableSettings {
   int dimmingLength = 1000;
   float colourOffsetIncrement = 0.004;
 
-  boolean enabled = true;
+  bool enabled = true;
 
   int globalBrightness = 255;
+
+  std::string show = "rainbowBreathe";
 };

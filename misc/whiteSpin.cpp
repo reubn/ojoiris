@@ -4,8 +4,8 @@
 #include <Arduino.h>
 #include <FastLED.h>
 
-#include "allLEDs.h"
-#include "wifi.h"
+#include "allLEDs.hpp"
+#include "wifi.hpp"
 
 int globalBrightness = 255;
 boolean enabled = true;

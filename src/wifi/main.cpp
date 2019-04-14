@@ -1,8 +1,13 @@
+#include <string>
+
 #include <WiFiManager.h> // https://github.com/tzapu/WiFiManager
 #include <ESP8266mDNS.h>
 #include <ESP8266WebServer.h>
 
-#include "main.h"
+#include "../main.hpp"
+#include "../shows/coordinator/main.hpp"
+
+#include "main.hpp"
 
 WiFiManager wm;
 ESP8266WebServer server(80);
@@ -15,44 +20,49 @@ void initialiseWifi(ConfigurableSettings& settings){
   if(MDNS.begin("ojoiris")) Serial.println("mDNS Runnings");
 
   server.on("/", [&](){
+    if(server.hasArg("show")){
+      std::string arg = server.arg("show").c_str();
+      if (shows.find(arg) != shows.end()) settings.show = arg;
+    }
+
     if(server.hasArg("topHold")){
-      String arg = String(server.arg("topHold"));
+      std::string arg = server.arg("topHold").c_str();
       settings.topHold = atoi(arg.c_str());
     }
 
     if(server.hasArg("bottomHold")){
-      String arg = String(server.arg("bottomHold"));
+      std::string arg = server.arg("bottomHold").c_str();
       settings.bottomHold = atoi(arg.c_str());
     }
 
     if(server.hasArg("transitionLength")){
-      String arg = String(server.arg("transitionLength"));
+      std::string arg = server.arg("transitionLength").c_str();
       settings.transitionLength = atoi(arg.c_str());
     }
 
     if(server.hasArg("dimmingLength")){
-      String arg = String(server.arg("dimmingLength"));
+      std::string arg = server.arg("dimmingLength").c_str();
       settings.dimmingLength = atoi(arg.c_str());
     }
 
     if(server.hasArg("colourOffsetIncrement")){
-      String arg = String(server.arg("colourOffsetIncrement"));
+      std::string arg = server.arg("colourOffsetIncrement").c_str();
       settings.colourOffsetIncrement = atof(arg.c_str());
     }
 
     if(server.hasArg("fps")){
-      String arg = String(server.arg("fps"));
+      std::string arg = server.arg("fps").c_str();
       settings.fps = atof(arg.c_str());
     }
 
     if(server.hasArg("brightness")){
-      String arg = String(server.arg("brightness"));
+      std::string arg = server.arg("brightness").c_str();
       settings.maxBrightness = atoi(arg.c_str());
     }
 
     if(server.hasArg("enabled")){
-      String enabledArg = String(server.arg("enabled"));
-      settings.enabled = enabledArg == "true";
+      std::string enabledArg = server.arg("enabled").c_str();
+      settings.enabled = enabledArg.compare("true") == 0;
     }
 
     if(server.hasArg("resetWifi")){
@@ -61,6 +71,7 @@ void initialiseWifi(ConfigurableSettings& settings){
     }
 
     String response =
+      "show " + String(settings.show.c_str()) + "\n" +
       "brightness " + String(settings.maxBrightness) + "\n" +
       "topHold " + String(settings.topHold) + "\n" +
       "bottomHold " + String(settings.bottomHold) + "\n" +
