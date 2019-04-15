@@ -17,5 +17,5 @@ struct ConfigurableSettings {
 
   int globalBrightness = 255;
 
-  std::string show = "rainbowBreathe";
+  int showId = 0;
 };

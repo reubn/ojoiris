@@ -21,8 +21,8 @@ void initialiseWifi(ConfigurableSettings& settings){
 
   server.on("/", [&](){
     if(server.hasArg("show")){
-      std::string arg = server.arg("show").c_str();
-      if (shows.find(arg) != shows.end()) settings.show = arg;
+      int arg = atoi(server.arg("show").c_str());
+      if (shows.find(arg) != shows.end()) settings.showId = arg;
     }
 
     if(server.hasArg("topHold")){
@@ -71,7 +71,7 @@ void initialiseWifi(ConfigurableSettings& settings){
     }
 
     String response =
-      "show " + String(settings.show.c_str()) + "\n" +
+      "show " + String(settings.showId) + "\n" +
       "brightness " + String(settings.maxBrightness) + "\n" +
       "topHold " + String(settings.topHold) + "\n" +
       "bottomHold " + String(settings.bottomHold) + "\n" +
