@@ -15,7 +15,7 @@ ESP8266WebServer server(80);
 void initialiseWifi(ConfigurableSettings& settings){
   wm.setConfigPortalBlocking(false);
 
-  if(wm.autoConnect("Ojoiris", "noruega1911")) Serial.println("WiFi Connection Established");
+  if(wm.autoConnect("🌈👁", "noruega1911")) Serial.println("WiFi Connection Established");
 
   if(MDNS.begin("ojoiris")) Serial.println("mDNS Runnings");
 
