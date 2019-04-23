@@ -324,11 +324,7 @@ export default class QrScanner {
                 worker.removeEventListener('message', onMessage);
                 worker.removeEventListener('error', onError);
                 clearTimeout(timeout);
-                if (event.data.result !== null) {
-                    resolve(event.data.result);
-                } else {
-                    reject('QR code not found.');
-                }
+                resolve(event.data.result)
             };
             onError = (e) => {
                 worker.removeEventListener('message', onMessage);
