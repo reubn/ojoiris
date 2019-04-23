@@ -1,5 +1,5 @@
-import React, {createRef, useEffect} from 'react'
-import {useDispatch} from 'redux-react-hook'
+import React, {createRef, useEffect, useCallback} from 'react'
+import {useDispatch, useMappedState} from 'redux-react-hook'
 
 import parseQRCode from '../../store/actions/parseQRCode'
 
@@ -11,20 +11,27 @@ export default () => {
   const videoRef = createRef()
   const dispatch = useDispatch()
 
+  const mapState = useCallback(state => ({
+    haveMetadata: !!state.metadata.id
+  }), [])
+
+  const {haveMetadata} = useMappedState(mapState);
+
   useEffect(() => {
     const tmp = videoRef.current.play
 
     videoRef.current.play = () => true
     videoRef.current.specialPlay = tmp
 
-    const qrScanner = new QrScanner(videoRef.current, result => parseQRCode(dispatch, result));
-    qrScanner.start();
+    const qrScanner = new QrScanner(videoRef.current, result => parseQRCode(dispatch, result) && qrScanner.destroy())
+
+    qrScanner.start()
   })
 
   return (
     <section className={container}>
       <section className={overlay} />
-      <video ref={videoRef} muted autoPlay playsInline className={video} />
+      {!haveMetadata && <video ref={videoRef} muted autoPlay playsInline className={video} />}
     </section>
 )
 }

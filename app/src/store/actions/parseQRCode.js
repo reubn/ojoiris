@@ -7,4 +7,6 @@ export default (dispatch, {data, location}) => {
       type: 'QR_SCAN',
       payload: match.groups
   })
+
+  return match
 }
