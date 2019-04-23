@@ -25,21 +25,13 @@ export default () => {
     [fail]: [pulseFail, `Are you sure this is the right code?`]
   })[status]
 
-  let res = true
-  const qu = async result => {
-    if(res === false) return
-    res = false
-    await parseQRCode(dispatch, result)
-    res = true
-  }
-
   useEffect(() => {
     const tmp = videoRef.current.play
 
     videoRef.current.play = () => true
     videoRef.current.specialPlay = tmp
 
-    const qrScanner = new QrScanner(videoRef.current, qu)
+    const qrScanner = new QrScanner(videoRef.current, result => parseQRCode(dispatch, result))
 
     qrScanner.start()
 

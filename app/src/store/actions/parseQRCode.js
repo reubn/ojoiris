@@ -2,17 +2,12 @@ const sleep = m => new Promise(r => setTimeout(r, m))
 
 const pattern = /^WIFI:S:Ojoiris-(?<id>[A-Z]{2}[0-9]{2}).*?P:(?<password>.+?);;(?<key>.+?),(?<mac>.+?)$/
 
-export default async (dispatch, {data, location}) => {
+export default async (dispatch, result) => {
+  if(!result) return dispatch({type: 'QR_SCAN_SCANNING'})
 
+  const {data, location} = result
   const match = pattern.exec(data)
-  if(!match) {
-
-    dispatch({type: 'QR_SCAN_FAIL'})
-    await sleep(3500)
-
-    dispatch({type: 'QR_SCAN_SCANNING'})
-    return
-}
+  if(!match) return dispatch({type: 'QR_SCAN_FAIL'})
 
   dispatch({type: 'QR_SCAN_SUCCESS'})
 
