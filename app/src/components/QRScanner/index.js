@@ -19,10 +19,10 @@ export default () => {
 
   const {status} = useMappedState(mapState);
 
-  const overlayAnimation = ({
-    [scanning]: pulseScanning,
-    [success]: pulseSuccess,
-    [fail]: pulseFail
+  const [overlayAnimation, instruction] = ({
+    [scanning]: [pulseScanning, 'Scan the base of your light to activate'],
+    [success]: [pulseSuccess, 'Light Activated'],
+    [fail]: [pulseFail, `Are you sure this is the right code?`]
   })[status]
 
   let res = true
@@ -50,7 +50,7 @@ export default () => {
     <section className={container}>
       <section className={overlay}>
       <style>{`.${overlay}:after{animation-name: ${overlayAnimation}}`}</style>
-        <p className={instructions}>Scan the base of your light to activate</p>
+        <p className={instructions}>{instruction}</p>
       </section>
       <video ref={videoRef} muted autoPlay playsInline className={video} />
     </section>
