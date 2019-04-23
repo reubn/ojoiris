@@ -8,7 +8,7 @@ export default env => {
 
   return {
     mode: devMode ? 'development' : 'production',
-    entry: './src',
+    entry: ['@babel/polyfill', './src'],
     output: {
       path: resolve(__dirname, 'dist'),
       filename: 'bundle.js'

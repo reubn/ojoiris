@@ -22,10 +22,68 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
+  animation: pulseScanning 2s infinite;
 }
+
+.instructions {
+  z-index: 1;
+  position: relative;
+  margin-top: 10rem;
+  font-size: 2.75rem;
+  font-family: 'SF Pro Text', -apple-system, 'BlinkMacSystemFont';
+  text-align: center;
+  color: #fff;
+  text-shadow: rgba(0, 0, 0, 0.2) 0 0 10px;
+}
+
 .video {
   width: 100%;
   height: 100%;
   background: #000;
   object-fit: cover;
+}
+
+@keyframes pulseScanning {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 200, 0, 0.2);
+  }
+  25% {
+      box-shadow: 0 0 0 15px rgba(255, 200, 0, 0.3);
+  }
+  50% {
+      box-shadow: 0 0 0 15px rgba(255, 200, 0, 0);
+  }
+  100% {
+      box-shadow: 0 0 0 0 rgba(255, 200, 0, 0);
+  }
+}
+
+@keyframes pulseFail {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 10, 0, 0.2);
+  }
+  25% {
+      box-shadow: 0 0 0 15px rgba(255, 10, 0, 0.3);
+  }
+  50% {
+      box-shadow: 0 0 0 15px rgba(255, 10, 0, 0);
+  }
+  100% {
+      box-shadow: 0 0 0 0 rgba(255, 10, 0, 0);
+  }
+}
+
+@keyframes pulseSuccess {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 10, 0.2);
+  }
+  25% {
+      box-shadow: 0 0 0 15px rgba(0, 255, 10, 0.3);
+  }
+  50% {
+      box-shadow: 0 0 0 15px rgba(0, 255, 10, 0);
+  }
+  100% {
+      box-shadow: 0 0 0 0 rgba(0, 255, 10, 0);
+  }
 }

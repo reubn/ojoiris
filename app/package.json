@@ -23,6 +23,7 @@
     "worker-loader": "^2.0.0"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.4.3",
     "jsqr": "^1.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
