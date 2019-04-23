@@ -41,7 +41,7 @@ export default class QrScanner {
         this.videoElement.removeEventListener('play', this.onPlay)
         document.removeEventListener('visibilitychange', this.onVisibilityChange)
 
-        this.stop()
+        this.pause()
         this.qrWorker.postMessage({type: 'close'})
     }
 
@@ -76,10 +76,6 @@ export default class QrScanner {
                 this.active = false
                 throw e
             })
-    }
-
-    stop() {
-        this.pause()
     }
 
     pause() {

@@ -9,7 +9,7 @@ const grayscaleWeights = {
     useIntegerApproximation: true
 }
 
-self.onmessage = ({data: {type, data: {data: rgbaData, width, height}}}) => {
+self.onmessage = ({data: {type, data: {data: rgbaData, width, height}={}}={}}) => {
   if(type === 'decode') self.postMessage({
       type: 'scan',
       result: jsQR(rgbaData, width, height, {inversionAttempts, grayscaleWeights}),
