@@ -17,7 +17,20 @@ export default env => {
       rules: [{
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader"
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: ['style-loader',
+          {
+          loader: 'css-loader',
+            query: {
+              localIdentName: devMode ? '[local]-[emoji:1]' : '[emoji:2]',
+              modules: true
+            }
+        }
+      ]
       }]
     },
     plugins: [
@@ -29,10 +42,10 @@ export default env => {
       publicPath: '/',
       contentBase: './dist',
       compress: true,
-      host: '0.0.0.0',
+      host: 'reumac.local',
       disableHostCheck: true,
       port: 1616,
-      inline: false,
+      inline: true,
       https: {
         key: readFileSync('/Users/reuben/reumac.local+4-key.pem'),
         cert: readFileSync('/Users/reuben/reumac.local+4.pem'),
@@ -45,5 +58,8 @@ export default env => {
       //   }]
       // }
     },
+    resolve: {
+      extensions: ['.wasm', '.mjs', '.js', '.css', '.json']
+    }
   }
 }

@@ -1,6 +1,10 @@
 import React, {useCallback} from 'react'
 import {useMappedState} from 'redux-react-hook'
 
+import QRScanner from '../QRScanner'
+
+import {app} from './style'
+
 export default () => {
   const mapState = useCallback(state => ({
     homescreen: state.homescreen
@@ -8,5 +12,7 @@ export default () => {
 
   const {homescreen} = useMappedState(mapState);
 
-  return <p>{homescreen ? 1 : 0}</p>
+  return <section className={app}>
+    <QRScanner />
+  </section>
 }
