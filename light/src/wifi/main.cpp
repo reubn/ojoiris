@@ -3,17 +3,21 @@
 
 #include <WiFiManager.h> // https://github.com/tzapu/WiFiManager
 #include <ESP8266mDNS.h>
-#include <ESP8266WebServer.h>
+// #include <ESP8266WebServer.h>
+#include <ESP8266WebServerSecure.h>
 #include <SHA256.h>
 
 #include "../main.hpp"
-#include "../secrets.hpp"
 #include "../shows/coordinator/main.hpp"
+
+#include CERT_PATH
+#include KEY_PATH
 
 #include "main.hpp"
 
 WiFiManager wm;
-ESP8266WebServer server(80);
+// ESP8266WebServer server(80);
+BearSSL::ESP8266WebServerSecure server(443);
 
 SHA256 sha256;
 uint8_t HMAC[32];
@@ -54,13 +58,15 @@ void CORSHeaders(){
 }
 
 void initialiseWifi(ConfigurableSettings& settings){
-  std::string SSID = std::string("Ojoiris-").append(std::string(lightID));
-  std::string mdnsName = std::string("ojoiris-").append(std::string(lightID));
 
   wm.setConfigPortalBlocking(false);
-  if(wm.autoConnect(SSID.c_str(), wifiPassword)) Serial.println("WiFi Connection Established");
+  if(wm.autoConnect(WIFI_SSID, wifiPassword)) Serial.println("WiFi Connection Established");
 
-  if(MDNS.begin(mdnsName.c_str())) Serial.println("mDNS Running");
+  if(MDNS.begin(MDNS_DOMAIN)) Serial.println("mDNS Running: " MDNS_DOMAIN);
+
+  server.setRSACert(
+    new BearSSL::X509List(CERT_VAR, CERT_LEN_VAR),
+    new BearSSL::PrivateKey(KEY_VAR, KEY_LEN_VAR));
 
   server.on("/", HTTP_OPTIONS, []() {
     CORSHeaders();
