@@ -36,7 +36,8 @@ std::string hexStr(unsigned char *data, int len)
 }
 
 void CORSHeaders(){
-  Serial.println("CORS");
+  // Serial.println("CORS");
+
   // if(server.hasHeader("Origin")) {
   //   bool allowed = false;
   //   const char *origin = server.header("Origin").c_str();
