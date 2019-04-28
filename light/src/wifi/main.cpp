@@ -3,21 +3,21 @@
 
 #include <WiFiManager.h> // https://github.com/tzapu/WiFiManager
 #include <ESP8266mDNS.h>
-// #include <ESP8266WebServer.h>
-#include <ESP8266WebServerSecure.h>
+#include <ESP8266WebServer.h>
+// #include <ESP8266WebServerSecure.h>
 #include <SHA256.h>
 
 #include "../main.hpp"
 #include "../shows/coordinator/main.hpp"
 
-#include CERT_PATH
-#include KEY_PATH
+// #include CERT_PATH
+// #include KEY_PATH
 
 #include "main.hpp"
 
 WiFiManager wm;
-// ESP8266WebServer server(80);
-BearSSL::ESP8266WebServerSecure server(443);
+ESP8266WebServer server(80);
+// BearSSL::ESP8266WebServerSecure server(443);
 
 SHA256 sha256;
 uint8_t HMAC[32];
@@ -64,9 +64,9 @@ void initialiseWifi(ConfigurableSettings& settings){
 
   if(MDNS.begin(MDNS_DOMAIN)) Serial.println("mDNS Running: " MDNS_DOMAIN);
 
-  server.setRSACert(
-    new BearSSL::X509List(CERT_VAR, CERT_LEN_VAR),
-    new BearSSL::PrivateKey(KEY_VAR, KEY_LEN_VAR));
+  // server.setRSACert(
+  //   new BearSSL::X509List(CERT_VAR, CERT_LEN_VAR),
+  //   new BearSSL::PrivateKey(KEY_VAR, KEY_LEN_VAR));
 
   server.on("/", HTTP_OPTIONS, []() {
     CORSHeaders();
