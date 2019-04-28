@@ -1,4 +1,5 @@
 #include <string>
+#include <algorithm>
 
 #include <WiFiManager.h> // https://github.com/tzapu/WiFiManager
 #include <ESP8266mDNS.h>
@@ -30,6 +31,28 @@ std::string hexStr(unsigned char *data, int len)
   return s;
 }
 
+void CORSHeaders(){
+  Serial.println("CORS");
+  // if(server.hasHeader("Origin")) {
+  //   bool allowed = false;
+  //   const char *origin = server.header("Origin").c_str();
+  //   Serial.println(origin);
+  //
+  //   for(auto& allowedOrigin : allowedOrigins){
+  //     Serial.println(allowedOrigin.c_str());
+  //     if(allowed == true || std::string(origin).find(allowedOrigin) != std::string::npos) allowed = true;
+  //   }
+  //
+  //   if(allowed) server.sendHeader("Access-Control-Allow-Origin", origin);
+  // }
+  server.sendHeader("Access-Control-Allow-Origin", "*");
+
+
+  server.sendHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
+  server.sendHeader("Access-Control-Max-Age", "10000");
+  server.sendHeader("Access-Control-Allow-Headers", "Origin, Content-Type, Accept");
+}
+
 void initialiseWifi(ConfigurableSettings& settings){
   std::string SSID = std::string("Ojoiris-").append(std::string(lightID));
   std::string mdnsName = std::string("ojoiris-").append(std::string(lightID));
@@ -39,7 +62,17 @@ void initialiseWifi(ConfigurableSettings& settings){
 
   if(MDNS.begin(mdnsName.c_str())) Serial.println("mDNS Running");
 
-  server.on("/", [&](){
+  server.on("/", HTTP_OPTIONS, []() {
+    CORSHeaders();
+    server.send(200, "text/plain", "OK");
+  });
+
+  server.on("/", HTTP_GET, [&](){
+    CORSHeaders();
+    server.sendHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    server.sendHeader("Pragma", "no-cache");
+    server.sendHeader("Expires", "0");
+
     if(!server.hasArg("hmac")){
       server.send(401, "text/plain", "No HMAC");
       return;
@@ -47,7 +80,6 @@ void initialiseWifi(ConfigurableSettings& settings){
 
     std::string params = "";
     for (int i = 0; i < server.args(); i++) params += std::string(server.argName(i).c_str()).compare("hmac") == 0 ? "" : std::string(server.argName(i).c_str()) + "=" + std::string(server.arg(i).c_str()) + "&";
-
 
     std::string suppliedHMAC = server.arg("hmac").c_str();
     std::string calculatedHMAC;
