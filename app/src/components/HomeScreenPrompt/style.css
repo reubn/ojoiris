@@ -1,0 +1,54 @@
+.prompt {
+    width: 95vw;
+    background: #fff;
+    border-radius: 5px;
+    font-size: 2.25rem;
+    font-family: 'SF Pro Text', -apple-system, 'BlinkMacSystemFont';
+    padding: 0.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+  font-weight: 300;
+}
+
+.icon {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.shareIcon {
+  fill: rgba(0, 122, 255);
+  width: 44px;
+}
+
+.addToHomeScreenIcon {
+  width: 120px;
+}
+
+.step {
+  font-size: 3rem;
+  display: flex;
+  width: 100%;
+  margin-bottom: 2.5rem;
+  margin-top: 2.5rem;
+}
+
+.instruction {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 300;
+}
+
+.bold {
+  font-weight: 400;
+}
