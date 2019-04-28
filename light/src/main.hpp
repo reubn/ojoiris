@@ -18,4 +18,8 @@ struct ConfigurableSettings {
   int globalBrightness = 255;
 
   int showId = 0;
+
+  int red = 255;
+  int green = 0;
+  int blue = 255;
 };

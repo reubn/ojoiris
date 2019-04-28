@@ -5,8 +5,9 @@
 
 #include "./shows/rainbowBreathe.hpp"
 #include "./shows/ringFade.hpp"
+#include "./shows/solidColour.hpp"
 
-std::map<int, void (*)(ConfigurableSettings& settings)> shows{{0, loopRainbowBreathe}, {1, loopRingFade}};
+std::map<int, void (*)(ConfigurableSettings& settings)> shows{{0, loopRainbowBreathe}, {1, loopRingFade}, {2, loopSolidColour}};
 int lastShow;
 
 void initialiseCoordinator(ConfigurableSettings& settings){};

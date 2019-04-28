@@ -109,6 +109,21 @@ void initialiseWifi(ConfigurableSettings& settings){
       settings.maxBrightness = atoi(arg.c_str());
     }
 
+    if(server.hasArg("red")){
+      std::string arg = server.arg("red").c_str();
+      settings.red = atoi(arg.c_str());
+    }
+
+    if(server.hasArg("green")){
+      std::string arg = server.arg("green").c_str();
+      settings.green = atoi(arg.c_str());
+    }
+
+    if(server.hasArg("blue")){
+      std::string arg = server.arg("blue").c_str();
+      settings.blue = atoi(arg.c_str());
+    }
+
     if(server.hasArg("enabled")){
       std::string enabledArg = server.arg("enabled").c_str();
       settings.enabled = enabledArg.compare("true") == 0;
