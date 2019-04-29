@@ -4,7 +4,7 @@
   "description": "",
   "main": "./src",
   "scripts": {
-    "start": "npx webpack-dev-server --env=development"
+    "start": "node ./webpack"
   },
   "author": "reuben <reuben.eggar@me.com>",
   "license": "MIT",
