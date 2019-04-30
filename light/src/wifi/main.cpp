@@ -61,7 +61,7 @@ void CORSHeaders(){
 void initialiseWifi(ConfigurableSettings& settings){
 
   wm.setConfigPortalBlocking(false);
-  if(wm.autoConnect(WIFI_SSID, wifiPassword)) Serial.println("WiFi Connection Established");
+  if(wm.autoConnect(WIFI_SSID, WIFI_PASS)) Serial.println("WiFi Connection Established");
 
   if(MDNS.begin(MDNS_DOMAIN)) Serial.println("mDNS Running: " MDNS_DOMAIN);
 
@@ -93,9 +93,9 @@ void initialiseWifi(ConfigurableSettings& settings){
     const char *argumentList = params.data();
 	  // params.copy(argumentList, params.size() + 1);
 
-    sha256.resetHMAC(key, strlen(key));
-    sha256.update(argumentList, strlen(argumentList));
-    sha256.finalizeHMAC(key, strlen(key), HMAC, sizeof(HMAC));
+      sha256.resetHMAC(DEVICE_KEY, strlen(DEVICE_KEY));
+      sha256.update(argumentList, strlen(argumentList));
+      sha256.finalizeHMAC(DEVICE_KEY, strlen(DEVICE_KEY), HMAC, sizeof(HMAC));
 
     calculatedHMAC = hexStr(HMAC, sizeof(HMAC));
 
