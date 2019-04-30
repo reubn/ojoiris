@@ -59,7 +59,6 @@ void CORSHeaders(){
 }
 
 void initialiseWifi(ConfigurableSettings& settings){
-
   wm.setConfigPortalBlocking(false);
   if(wm.autoConnect(WIFI_SSID, WIFI_PASS)) Serial.println("WiFi Connection Established");
 
