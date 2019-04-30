@@ -14,7 +14,7 @@ void initialiseCoordinator(ConfigurableSettings& settings){};
 
 void loopCoordinator(ConfigurableSettings& settings){
   if(settings.showId != lastShow) {
-    for(auto& ringLED : allLEDs) rawLEDs[ringLED.index] = CHSV(0, 0, 0);
+    for(auto& ringLED : allLEDs) rawLEDs[ringLED.index] = CRGB(0, 0, 0);
     Serial.println("Changing Show");
   };
 
