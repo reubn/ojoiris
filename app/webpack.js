@@ -15,7 +15,7 @@ const config = {
     filename: 'bundle.js'
   },
   module: {
-    rules: [{
+  rules: [{
       test: /\.js$/,
       exclude: /node_modules/,
       loader: 'babel-loader'
@@ -25,15 +25,22 @@ const config = {
       exclude: /node_modules/,
       use: ['style-loader',
         {
-        loader: 'css-loader',
+          loader: 'css-loader',
           query: {
             localIdentName: devMode ? '[local]-[emoji:1]' : '[emoji:2]',
-            modules: true
+            modules: true,
+            importLoaders: 1
           }
-      }
-    ]
-    }]
-  },
+        },
+          'postcss-loader'
+      ]
+    },
+    {
+      test: /\.png$/,
+      use: 'file-loader'
+    }
+  ]
+},
   plugins: [
     new CopyPlugin([
       {from: './src/index.html', to: 'index.html'}

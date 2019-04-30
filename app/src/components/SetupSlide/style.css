@@ -1,0 +1,70 @@
+.prompt {
+    width: 100%;
+    background: #fff;
+    border-radius: 5px;
+    font-size: 2.25rem;
+    padding: 0.5rem 0;
+    text-align: center;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.explination {
+  padding-top: 5rem;
+  padding-bottom: 2rem;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  font-size: 2.25rem;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 4rem;
+  color: #fff;
+  margin: 0;
+}
+
+.description {
+  font-weight: 300;
+  font-size: 2.5rem;
+  width: 75vw;
+  color: #fff;
+}
+
+.icon {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.step {
+  font-size: 2.75rem;
+  display: flex;
+  width: 100%;
+  margin-bottom: 2.5rem;
+  margin-top: 2.5rem;
+}
+
+.instruction {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 300;
+  padding-right: 4rem;
+  padding-left: 4rem;
+}
+
+.bold {
+  font-weight: 400;
+}

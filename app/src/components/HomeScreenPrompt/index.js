@@ -1,14 +1,18 @@
-import React, {useCallback} from 'react'
-import {useMappedState} from 'redux-react-hook'
+import React from 'react'
 
 import ShareIcon from './ShareIcon'
 import AddToHomeScreenIcon from './AddToHomeScreenIcon'
 
-import {title, prompt, step, icon, instruction, bold, shareIcon, addToHomeScreenIcon} from './style'
+import {title, explination, description, prompt, step, icon, instruction, bold, shareIcon, addToHomeScreenIcon} from './style'
 
 export default () => (
+  <>
+  <section className={explination}>
+  <h1 className={title}>Home Screen</h1>
+  <p className={description}>To get your light up and running, add the add to your Home Screen</p>
+</section>
   <section className={prompt}>
-    <h1 className={title}>To carry on setting up your light</h1>
+
     <section className={step}>
       <section className={icon}>
         <ShareIcon className={shareIcon} />
@@ -26,4 +30,5 @@ export default () => (
       </section>
     </section>
   </section>
+  </>
 )
