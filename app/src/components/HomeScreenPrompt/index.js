@@ -8,8 +8,8 @@ import {title, explination, description, prompt, step, icon, instruction, bold, 
 export default () => (
   <>
   <section className={explination}>
-  <h1 className={title}>Home Screen</h1>
-  <p className={description}>To get your light up and running, add the add to your Home Screen</p>
+  <h1 className={title}>One Last Thing</h1>
+  <p className={description}>To access your light quickly, add the app to your Home Screen</p>
 </section>
   <section className={prompt}>
 
