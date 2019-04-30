@@ -80,32 +80,34 @@ void initialiseWifi(ConfigurableSettings& settings){
     server.sendHeader("Pragma", "no-cache");
     server.sendHeader("Expires", "0");
 
-    if(!server.hasArg("hmac")){
-      server.send(401, "text/plain", "No HMAC");
-      return;
-    }
+    if(server.args() > 0) {
+      if(!server.hasArg("hmac")){
+        server.send(401, "text/plain", "No HMAC");
+        return;
+      }
 
-    std::string params = "";
-    for (int i = 0; i < server.args(); i++) params += std::string(server.argName(i).c_str()).compare("hmac") == 0 ? "" : std::string(server.argName(i).c_str()) + "=" + std::string(server.arg(i).c_str()) + "&";
+      std::string params = "";
+      for (int i = 0; i < server.args(); i++) params += std::string(server.argName(i).c_str()).compare("hmac") == 0 ? "" : (params.length() > 0 ? "&" : "") + std::string(server.argName(i).c_str()) + "=" + std::string(server.arg(i).c_str());
 
-    std::string suppliedHMAC = server.arg("hmac").c_str();
-    std::string calculatedHMAC;
-    const char *argumentList = params.data();
-	  // params.copy(argumentList, params.size() + 1);
+      std::string suppliedHMAC = server.arg("hmac").c_str();
+      std::string calculatedHMAC;
+      const char *argumentList = params.data();
+  	  // params.copy(argumentList, params.size() + 1);
 
       sha256.resetHMAC(DEVICE_KEY, strlen(DEVICE_KEY));
       sha256.update(argumentList, strlen(argumentList));
       sha256.finalizeHMAC(DEVICE_KEY, strlen(DEVICE_KEY), HMAC, sizeof(HMAC));
 
-    calculatedHMAC = hexStr(HMAC, sizeof(HMAC));
+      calculatedHMAC = hexStr(HMAC, sizeof(HMAC));
 
-    // Serial.println(params.c_str());
-    // Serial.println(suppliedHMAC.c_str());
-    // Serial.println(calculatedHMAC.c_str());
+      // Serial.println(params.c_str());
+      // Serial.println(suppliedHMAC.c_str());
+      // Serial.println(calculatedHMAC.c_str());
 
-    if(suppliedHMAC.compare(calculatedHMAC) != 0) {
-      server.send(403, "text/plain", "HMAC Invalid");
-      return;
+      if(suppliedHMAC.compare(calculatedHMAC) != 0) {
+        server.send(403, "text/plain", "HMAC Invalid");
+        return;
+      }
     }
 
     if(server.hasArg("show")){
