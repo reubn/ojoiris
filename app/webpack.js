@@ -52,7 +52,7 @@ const config = {
     compress: true,
     host: 'reumac.local',
     disableHostCheck: true,
-    port: 1616,
+    port: 443,
     inline: true,
     https: ({
       key: readFileSync('/Users/reuben/reumac.local+4-key.pem'),
@@ -73,5 +73,5 @@ const config = {
 
 const wds = new WebpackDevServer(webpack(config), config.devServer)
 
-wds.listen(1616)
+wds.listen(443)
 http.createServer(wds.app).listen(80)
