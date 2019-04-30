@@ -6,8 +6,6 @@ export const empty = {
 }
 
 export default (hash => {
-  console.log({hash})
-
   if(!hash) return empty
 
   let decoded
