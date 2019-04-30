@@ -176,6 +176,9 @@ void initialiseWifi(ConfigurableSettings& settings){
 
     String response =
       // "HMAC " + String((char*)HMAC) + "\n" +
+      "blue " + String(settings.blue) + "\n" +
+      "green " + String(settings.green) + "\n" +
+      "red " + String(settings.red) + "\n" +
       "show " + String(settings.showId) + "\n" +
       "brightness " + String(settings.maxBrightness) + "\n" +
       "topHold " + String(settings.topHold) + "\n" +
