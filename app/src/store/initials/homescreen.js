@@ -1,1 +1,3 @@
-export default navigator.standalone === true
+export default {
+  appMode: navigator.standalone === true
+}
