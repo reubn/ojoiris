@@ -10,13 +10,15 @@ import {app} from './style'
 export default () => {
     const mapState = useCallback(state => ({
       haveMetadata: !!state.metadata.id,
-      light: !!state.light
-    }), [])
+      light: state.light.state.hasOwnProperty('enabled'),
+      appMode: state.homescreen.appMode
+    }))
 
-    const {haveMetadata, light} = useMappedState(mapState)
+    const {haveMetadata, light, appMode} = useMappedState(mapState)
 
     let pane
-    if(haveMetadata && light) pane = <HomeScreenPrompt />
+    if(haveMetadata && light && appMode) pane = <span>Wow, We're Ready</span>
+    else if(haveMetadata && light) pane = <HomeScreenPrompt />
     else if(haveMetadata) pane = <WifiSetup />
     else pane = <QRScanner />
 
