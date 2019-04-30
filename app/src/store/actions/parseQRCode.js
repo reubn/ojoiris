@@ -1,3 +1,5 @@
+import metadataRead from './metadataRead'
+
 const sleep = m => new Promise(r => setTimeout(r, m))
 
 const pattern = /^WIFI:S:Ojoiris-(?<id>[A-Z]{2}[0-9]{2}).*?P:(?<password>.+?);;(?<key>.+?),(?<mac>.+?)$/
@@ -12,8 +14,5 @@ export default async (dispatch, result) => {
   dispatch({type: 'QR_SCAN_SUCCESS'})
 
   await sleep(800)
-  dispatch({
-      type: 'METADATA_READ',
-      payload: match.groups
-  })
+  metadataRead(dispatch, match.groups)
 }
