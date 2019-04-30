@@ -7,7 +7,7 @@ device="nodemcu"
 domain="ojoiris-${lightID}.local"
 domainLower=`echo "$domain" | tr '[:upper:]' '[:lower:]'`
 mDNSDomain="${domain//\.local/}"
-ssid="ojoiris-${lightID}"
+ssid="Ojoiris-${lightID}"
 
 certificatePath="$(pwd)/ssl/${domainLower}.secret.crt.h"
 keyPath="$(pwd)/ssl/${domainLower}.secret.key.h"
