@@ -24,7 +24,7 @@ export default () => {
   }, [state])
 
   // Dispatch local state changes
-  useEffect(() =>
+  useEffect(() => {
     if(!ignoreAsIsDuplicate) lightState(dispatch, localState)
   }, [localState])
 
