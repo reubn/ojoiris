@@ -1,0 +1,56 @@
+.container{
+  position: relative;
+  width: 90vw;
+  height: 90vw;
+  padding:0;
+  margin: 0;
+}
+
+.outerCircle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: radial-gradient(rgba(255,255,255,1), rgba(255, 255, 255, 0), rgba(0, 0, 0, 0)), conic-gradient(#f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
+  border-radius: 50%;
+  padding:0;
+  margin: 0;
+}
+
+.innerMaskingCircle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 70%;
+  z-index: 1;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.05) 0 0 1rem 1rem;
+  padding:0;
+  margin: 0;
+}
+
+
+.innerIndicatorCircle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 28%;
+  height: 28%;
+  z-index: 2;
+  background: #ff0076;
+  border-radius: 50%;
+  box-shadow: inset rgba(0, 0, 0, 0.05) 0 0 1rem 1rem;
+  padding:0;
+  margin: 0;
+}
+
+.portal{
+  position: absolute;
+}

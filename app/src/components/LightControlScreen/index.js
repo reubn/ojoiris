@@ -5,6 +5,8 @@ import lightState from '../../store/actions/lightState'
 
 import keepTheFuckStill from './keepTheFuckStill'
 
+import ColourPicker from './ColourPicker'
+
 import {screen, slider} from './style'
 
 export default () => {
@@ -39,6 +41,7 @@ export default () => {
 
   return (
     <section className={screen}>
+    <ColourPicker />
     <input type="range" min="0" max="255" value={localState.red} onChange={handleChange.bind(null, 'red')} className={slider} ref={redRef} />
     <input type="range" min="0" max="255" value={localState.green} onChange={handleChange.bind(null, 'green')} className={slider} ref={greenRef} />
     <input type="range" min="0" max="255" value={localState.blue} onChange={handleChange.bind(null, 'blue')} className={slider} ref={blueRef} />
