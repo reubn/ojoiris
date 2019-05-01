@@ -2,5 +2,6 @@ export const searching = Symbol('searching')
 
 export default {
   state: {},
-  status: searching
+  status: searching,
+  searchCount: 0
 }

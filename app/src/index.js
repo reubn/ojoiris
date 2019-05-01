@@ -4,7 +4,7 @@ import {render} from 'react-dom'
 import store from './store'
 
 import Root from './components/Root'
-store.dispatch({type: 'LIGHT_STATE'})
+store.dispatch({type: 'LIGHT_ONLINE_CHECK'})
 
 render(<Root store={store} />, document.getElementById('root'))
 
