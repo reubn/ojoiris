@@ -22,7 +22,7 @@ export default () => {
   const [overlayAnimation, instruction] = ({
     [scanning]: [pulseScanning, 'Scan the base of your light to activate'],
     [success]: [pulseSuccess, 'Light Activated'],
-    [fail]: [pulseFail, `Are you sure this is the right code?`]
+    [fail]: [pulseFail, 'Are you sure this is the right code?']
   })[status]
 
   useEffect(() => {
