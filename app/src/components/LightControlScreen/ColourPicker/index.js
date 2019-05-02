@@ -8,7 +8,7 @@ import keepStill from './keepStill'
 import {outerCircle, container, innerMaskingCircle, innerIndicatorCircle, portal} from './style'
 
 
-export default ({hue: hueProp=0}) => {
+export default ({hue: hueProp=0, onChange}) => {
   const containerRef = useRef(), outerCircleRef = useRef(), innerCircleRef = useRef(), portalRef = useRef()
 
   const [hue, setHue] = useState(hueProp)
@@ -16,7 +16,7 @@ export default ({hue: hueProp=0}) => {
 
   const handleTouch = touchHandler({outerCircleRef, innerCircleRef, portalRef, setHue})
 
-  useEffect(syncHueToPortal({outerCircleRef, innerCircleRef, hue, setPortalPosition}), [hue])
+  useEffect(syncHueToPortal({outerCircleRef, innerCircleRef, hue, setPortalPosition, onChange}), [hue])
   useEffect(keepStill(containerRef), [])
 
   return (

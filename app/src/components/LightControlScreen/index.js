@@ -41,7 +41,7 @@ export default () => {
 
   return (
     <section className={screen}>
-    <ColourPicker />
+    <ColourPicker onChange={hue => console.log(hue)}/>
     <input type="range" min="0" max="255" value={localState.red} onChange={handleChange.bind(null, 'red')} className={slider} ref={redRef} />
     <input type="range" min="0" max="255" value={localState.green} onChange={handleChange.bind(null, 'green')} className={slider} ref={greenRef} />
     <input type="range" min="0" max="255" value={localState.blue} onChange={handleChange.bind(null, 'blue')} className={slider} ref={blueRef} />

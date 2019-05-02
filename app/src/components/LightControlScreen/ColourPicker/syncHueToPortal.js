@@ -1,6 +1,8 @@
 import calculateSizing from './calculateSizing'
 
-export default ({outerCircleRef, innerCircleRef, hue, setPortalPosition}) => () => {
+export default ({outerCircleRef, innerCircleRef, hue, setPortalPosition, onChange}) => () => {
+  if(onChange) onChange(hue)
+  
   const {outerRadius, midlineRadius} = calculateSizing({outerCircleRef, innerCircleRef})
   const colourRadians = (hue * Math.PI) / 180
 
