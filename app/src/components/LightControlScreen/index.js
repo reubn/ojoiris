@@ -1,4 +1,4 @@
-import React, {useEffect, useCallback, useState, createRef} from 'react'
+import React, {useEffect, useCallback, useState, useRef} from 'react'
 import {useDispatch, useMappedState} from 'redux-react-hook'
 
 import lightState from '../../store/actions/lightState'
@@ -31,7 +31,7 @@ export default () => {
   }, [localState])
 
   // Prevent swipes from moving page about
-  const [redRef, greenRef, blueRef] = [createRef(), createRef(), createRef()]
+  const [redRef, greenRef, blueRef] = [useRef(), useRef(), useRef()]
   useEffect(keepTheFuckStill({refs: [redRef, greenRef, blueRef], min: 0, max: 255, threshold: 150}), [])
 
   const handleChange = (key, {target: {value}}) => {
