@@ -1,7 +1,7 @@
 .container{
   position: relative;
-  width: 90vw;
-  height: 90vw;
+  width: 70vw;
+  height: 70vw;
   padding:0;
   margin: 0;
 }
@@ -53,4 +53,12 @@
 
 .portal{
   position: absolute;
+  transform: translate(-50%, 50%);
+  border-radius: 50%;
+  display:block;
+  width: 5rem;
+  height:5rem;
+  background: #fff;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.05) 0 0 1rem 1rem;
 }
