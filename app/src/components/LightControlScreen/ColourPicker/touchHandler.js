@@ -10,7 +10,7 @@ export default ({outerCircleRef, innerCircleRef, portalRef, setHue}) => event =>
   const [eventX, eventY] = [eventAbsoluteX - centerX, eventAbsoluteY - centerY] // Translate event position from page-based, to container-based
 
   const colourRadians = Math.atan2(eventY, eventX) + (0.5 * Math.PI) // Get angle between y-axis and touch event; rotate 1 quarter to reframe against x-axis
-  const colourDegrees = Math.round(colourRadians / Math.PI * 180) % 360
+  const colourDegrees = (360 + Math.round(colourRadians / Math.PI * 180)) % 360
 
   setHue(colourDegrees)
 }
