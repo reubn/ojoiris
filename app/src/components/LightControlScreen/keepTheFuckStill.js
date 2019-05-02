@@ -14,5 +14,8 @@ export default ({refs, min=0, max, threshold=150}) => {
     else event.preventDefault()
   }
 
-  return () => refs.forEach(ref => ref.current.addEventListener('touchmove', handler))
+  return () => {
+    refs.forEach(ref => ref.current.addEventListener('touchmove', handler))
+    return () => refs.forEach(ref => ref.current.removeEventListener('touchmove', handler))
+  }
 }
