@@ -1,4 +1,4 @@
-import React, {createRef, useEffect, useCallback} from 'react'
+import React, {useEffect, useCallback} from 'react'
 import {useDispatch, useMappedState} from 'redux-react-hook'
 
 import {searching as searchingSymbol} from '../../store/reducers/light'
