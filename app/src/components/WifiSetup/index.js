@@ -25,7 +25,7 @@ export default () => {
     searching
     ? 'Looking for your light'
     : searchCount >= 3
-      ? `Hmmm, can't seem to find your light`
+      ? `Hmmm, can't seem to find your light. Is it connected?`
       : `It's time to turn your light on!`
 
   useEffect(() => {
