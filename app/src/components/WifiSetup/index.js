@@ -13,10 +13,13 @@ export default () => {
   const dispatch = useDispatch()
   const mapState = useCallback(state => ({
     searching: state.light.status === searchingSymbol,
-    searchCount: state.light.searchCount
+    searchCount: state.light.searchCount,
+    mac: state.metadata.mac
   }))
 
-  const {searching, searchCount} = useMappedState(mapState)
+  const {searching, searchCount, mac} = useMappedState(mapState)
+
+  const formattedMACAddress = [...mac].reduce((string, value, index, array, lastValue=array[index - 1] || '', colon=index === array.length - 1 ? '' : ':') => (index % 2) ? `${string}${lastValue}${value}${colon}` : string, '')
 
   const statusMessage =
     searching
@@ -41,7 +44,7 @@ export default () => {
       <section className={step}>
         <section className={instruction}>
           <p>Firstly, plug in your light using a <span className={noBreak}><span className={bold}>Micro USB</span> cable.</span> It should light up!</p>
-          <p>If your WiFi network requires you to whitelist MAC addresses, use <code className={code}>80:7d:3a:6e:92:76</code></p>
+          <p>If your WiFi network requires you to whitelist MAC addresses, use <code className={code}>{formattedMACAddress}</code></p>
         </section>
       </section>
       <section className={step}>
