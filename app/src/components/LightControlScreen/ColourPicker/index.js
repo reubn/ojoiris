@@ -2,6 +2,8 @@ import React, {useRef, useEffect, useState} from 'react'
 
 import calculateSizing from './calculateSizing'
 import touchHandler from './touchHandler'
+import syncHuePropToHue from './syncHuePropToHue'
+import syncHueToOnChange from './syncHueToOnChange'
 import syncHueToPortal from './syncHueToPortal'
 import keepStill from './keepStill'
 
@@ -12,13 +14,16 @@ export default ({hue: hueProp=0, onChange}) => {
   const containerRef = useRef(), outerCircleRef = useRef(), innerCircleRef = useRef(), portalRef = useRef()
 
   const [hue, setHue] = useState(hueProp)
+  const [realEvent, setRealEvent] = useState(false)
   const [portalPosition, setPortalPosition] = useState({left: null, bottom: null})
 
-  useEffect(() => setHue(hueProp), [hueProp])
-  useEffect(syncHueToPortal({outerCircleRef, innerCircleRef, hue, setPortalPosition, onChange}), [hue])
+  useEffect(syncHuePropToHue({setRealEvent, setHue, hueProp}), [hueProp])
+  useEffect(syncHueToOnChange({realEvent, onChange, hue}), [hue])
+  useEffect(syncHueToPortal({outerCircleRef, innerCircleRef, hue, setPortalPosition}), [hue])
+
   useEffect(keepStill(containerRef), [])
 
-  const handleTouch = touchHandler({outerCircleRef, innerCircleRef, portalRef, setHue})
+  const handleTouch = touchHandler({outerCircleRef, innerCircleRef, portalRef, setHue, setRealEvent})
 
   return (
     <>
