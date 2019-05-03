@@ -4,6 +4,7 @@
   height: 70vw;
   padding:0;
   margin: 0;
+  user-select: none;
 }
 
 .outerCircle {
@@ -55,7 +56,12 @@
   font-size: 7rem;
   font-weight: 100;
   color: #efefef;
+
+  &:active {
+    color:#ccc;
+  }
 }
+
 
 .portal{
   position: absolute;
@@ -64,8 +70,13 @@
   border-radius: 8px;
   display: block;
   width: 2%;
-  height: 8%;
+  height: 6%;
   background: #fff;
   cursor: pointer;
-  box-shadow: rgba(0, 0, 0, 0.04) 0 0 2rem 2rem;
+  box-shadow: rgba(0, 0, 0, 0.04) 0 0 0.5rem 0;
+  transition: height 0.25s ease;
+
+  &:active, .active & {
+    height: 10%;
+  }
 }

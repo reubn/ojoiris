@@ -2,8 +2,8 @@
   position: relative;
   border-radius: 50%;
   background: currentColor;
-  width: 30%;
-  height: 30%;
+  width: 20%;
+  height: 20%;
 }
 .ray {
   position: absolute;
@@ -20,7 +20,7 @@
   height: 100%;
   background: currentColor;
   border-radius: 20px;
-  transition: width 0.3s, margin 0.3s, color 0.3s;
+  transition: all 0.3s cubic-bezier(0, 1.04, .82, 1.08);
 
   width: var(--width);
   margin-left: var(--margin);
