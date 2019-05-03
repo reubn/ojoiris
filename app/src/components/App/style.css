@@ -9,6 +9,6 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  font-family: 'SF Pro Text', -apple-system, 'BlinkMacSystemFont';
+  font-family: 'SF Pro Display', -apple-system, 'BlinkMacSystemFont', 'SF Pro Text';
   user-select: none;
 }
