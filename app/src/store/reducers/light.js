@@ -3,7 +3,7 @@ import inital, {searching} from '../initials/light'
 export const notSearching = Symbol('notSearching')
 
 export default (state=inital, {type, payload={}, ...action}) => {
-  if(type === 'LIGHT_STATE') return {
+  if(type === 'LIGHT_STATE' || type === 'LIGHT_STATE_CONFIRMED' || type === 'LIGHT_STATE_ROLLBACK') return {
     ...state,
     state: {
       ...state.state,
@@ -16,13 +16,7 @@ export default (state=inital, {type, payload={}, ...action}) => {
     status: searching
   }
 
-  if(type === 'LIGHT_SEARCHING_FOUND') return {
-    ...state,
-    status: notSearching,
-    searchCount: state.searchCount + 1
-  }
-
-  if(type === 'LIGHT_SEARCHING_NOT_FOUND') return {
+  if(type === 'LIGHT_SEARCHING_FOUND' || type === 'LIGHT_SEARCHING_NOT_FOUND') return {
     ...state,
     status: notSearching,
     searchCount: state.searchCount + 1

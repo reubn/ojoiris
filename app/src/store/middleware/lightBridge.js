@@ -8,17 +8,20 @@ export default ({getState, dispatch}) => next => async action => {
   const {light: {state: previousState}} = getState()
   next(action)
 
-  if(action.type === 'LIGHT_STATE' && !action.noTrigger){
+  if(action.type === 'LIGHT_STATE'){
+    const rollback = () => dispatch({type: 'LIGHT_STATE_ROLLBACK', payload: previousState})
+
     const {light: {state}, metadata} = getState()
 
-    if(!metadata.id) return
-    const response = await makeRequest(state, metadata).catch(() => dispatch({type: 'LIGHT_STATE', payload: previousState, noTrigger: true}))
-    const text = await response.text().catch(() => dispatch({type: 'LIGHT_STATE', payload: previousState, noTrigger: true}))
+    const response = await makeRequest(state, metadata).catch(() => ({ok: false}))
+
+    if(!response.ok) return rollback()
+
+    const text = await response.text().catch(rollback)
 
     dispatch({
-      type: 'LIGHT_STATE',
-      payload: parseResponse(text),
-      noTrigger: true
+      type: 'LIGHT_STATE_CONFIRMED',
+      payload: parseResponse(text)
     })
   }
 
@@ -33,9 +36,8 @@ export default ({getState, dispatch}) => next => async action => {
     const text = await response.text()
 
     dispatch({
-      type: 'LIGHT_STATE',
-      payload: parseResponse(text),
-      noTrigger: true
+      type: 'LIGHT_STATE_CONFIRMED',
+      payload: parseResponse(text)
     })
     dispatch({type: 'LIGHT_SEARCHING_FOUND'})
   }
