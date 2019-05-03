@@ -1,0 +1,36 @@
+.centre {
+  position: relative;
+  border-radius: 50%;
+  background: currentColor;
+  width: 30%;
+  height: 30%;
+}
+.ray {
+  position: absolute;
+  width: 90%;
+  height: 10%;
+  top: 50%;
+  transform: translateX(-95%) translateY(-50%) rotate(calc(45deg * var(--n)));
+  transform-origin: calc(100% + 50%) 50%;
+}
+
+.ray:after {
+  display: block;
+  content: "";
+  height: 100%;
+  background: currentColor;
+  border-radius: 20px;
+  transition: width 0.3s, margin 0.3s, color 0.3s;
+
+  width: var(--width);
+  margin-left: var(--margin);
+}
+
+.ray:nth-child(1){--n: 0;}
+.ray:nth-child(2){--n: 1;}
+.ray:nth-child(3){--n: 2;}
+.ray:nth-child(4){--n: 3;}
+.ray:nth-child(5){--n: 4;}
+.ray:nth-child(6){--n: 5;}
+.ray:nth-child(7){--n: 6;}
+.ray:nth-child(8){--n: 7;}

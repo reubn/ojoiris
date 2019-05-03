@@ -31,9 +31,9 @@ export default () => {
     if(!ignoreAsIsDuplicate) lightState(dispatch, localState)
   }, [localState])
 
-  const handleChange = hue => {
+  const handleChange = ({hue, enabled}) => {
     const [red, green, blue] = hsl2rgb([hue, 100, 50]).map(n => Math.round(n))
-    setLocalState({...localState, red, green, blue})
+    setLocalState({...localState, red, green, blue, enabled})
     setIgnoreAsIsDuplicate(false)
   }
 
@@ -41,7 +41,7 @@ export default () => {
 
   return (
     <section className={screen}>
-    <ColourPicker hue={hue} onChange={handleChange}/>
+    <ColourPicker hue={hue} enabled={localState.enabled} onChange={handleChange}/>
     </section>
   )
 }
