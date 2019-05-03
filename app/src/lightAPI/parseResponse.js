@@ -3,7 +3,7 @@ export default text => text.trim().split('\n').reduce((object, line) => {
 
     let normalisedValue = value
 
-    if(key === 'enabled') normalisedValue = !!value
+    if(key === 'enabled') normalisedValue = value === '1'
     else try {normalisedValue = parseInt(value)} catch(_){}
 
     return {
