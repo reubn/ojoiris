@@ -11,4 +11,6 @@
   flex-direction: column;
   font-family: 'SF Pro Display', -apple-system, 'BlinkMacSystemFont', 'SF Pro Text';
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
 }
