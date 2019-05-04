@@ -14,6 +14,7 @@ const config = {
     path: resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
+  devtool: devMode ? 'source-map' : undefined,
   module: {
   rules: [{
       test: /\.js$/,
