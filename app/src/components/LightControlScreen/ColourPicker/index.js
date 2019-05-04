@@ -25,14 +25,14 @@ export default ({hue: hueProp=0, enabled: enabledProp=false, onChange}) => {
 
   useEffect(syncPropsToState({setRealEvent, setHue, hueProp, setEnabled, enabledProp}), [hueProp, enabledProp])
   useEffect(syncStateToOnChange({realEvent, onChange, hue, enabled}), [hue, enabled])
-  useEffect(syncStateToPortal({outerCircleRef, innerCircleRef, hue, setPortalPosition}), [hue])
+  useEffect(syncStateToPortal({containerRef, innerCircleRef, hue, setPortalPosition}), [hue, enabled])
 
   useEffect(keepStill(containerRef), [])
 
   const touchOn = () => setActive(true)
   const touchOff = () => setActive(false)
 
-  const handleTouch = touchHandler({outerCircleRef, innerCircleRef, portalRef, setHue, setRealEvent, touchOn, enabled})
+  const handleTouch = touchHandler({outerCircleRef, containerRef, innerCircleRef, portalRef, setHue, setRealEvent, touchOn, enabled})
   const handlePress = event => {
     setRealEvent(true)
     setEnabled(!enabled)
@@ -43,7 +43,8 @@ export default ({hue: hueProp=0, enabled: enabledProp=false, onChange}) => {
       <section ref={containerRef} className={classnames(container, {[activeStyle]: active, [disabled]: !enabled})} onTouchStart={handleTouch} onTouchMove={handleTouch} onTouchEnd={touchOff}>
         <section ref={outerCircleRef} className={outerCircle}></section>
         <section ref={portalRef} className={portal} style={portalPosition}></section>
-        <section ref={innerCircleRef} className={innerMaskingCircle}></section>
+        <section className={innerMaskingCircle}></section>
+        <section ref={innerCircleRef} className={innerMaskingCircle} style={{opacity: 0, transition: 'none'}}></section>
         <section className={innerIndicatorCircle} style={{background: `hsl(${hue}, 100%, 50%)`}}></section>
         <section className={indicatorMaskingCircle} onTouchEnd={handlePress}>
           <BrightnessIcon brightness={enabled ? 1 : 0} />

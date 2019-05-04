@@ -1,5 +1,5 @@
-export default ({outerCircleRef, innerCircleRef}) => {
-  const {x: containerX, y: containerY, width: widthOuter, height: heightOuter} = outerCircleRef.current.getBoundingClientRect()
+export default ({containerRef, innerCircleRef}) => {
+  const {x: containerX, y: containerY, width: widthOuter, height: heightOuter} = containerRef.current.getBoundingClientRect()
   const {width: widthInner, height: heightInner} = innerCircleRef.current.getBoundingClientRect()
 
   const [centerX, centerY] = [
