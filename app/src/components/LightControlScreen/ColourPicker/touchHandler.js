@@ -1,7 +1,7 @@
 import calculateSizing from './calculateSizing'
 
-export default ({outerCircleRef, innerCircleRef, portalRef, setHue, setRealEvent, touchOn}) => event => {
-  if(event.target !== outerCircleRef.current && event.target !== portalRef.current) return
+export default ({outerCircleRef, innerCircleRef, portalRef, setHue, setRealEvent, touchOn, enabled}) => event => {
+  if(!enabled || (event.target !== outerCircleRef.current && event.target !== portalRef.current)) return
   touchOn()
 
   const {centerX, centerY, outerRadius, midlineRadius} = calculateSizing({outerCircleRef, innerCircleRef})

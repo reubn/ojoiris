@@ -10,7 +10,7 @@ import keepStill from './keepStill'
 
 import BrightnessIcon from './BrightnessIcon'
 
-import {outerCircle, container, innerMaskingCircle, innerIndicatorCircle, indicatorMaskingCircle, portal, active as activeStyle} from './style'
+import {outerCircle, container, innerMaskingCircle, innerIndicatorCircle, indicatorMaskingCircle, portal, active as activeStyle, disabled} from './style'
 
 
 export default ({hue: hueProp=0, enabled: enabledProp=false, onChange}) => {
@@ -32,7 +32,7 @@ export default ({hue: hueProp=0, enabled: enabledProp=false, onChange}) => {
   const touchOn = () => setActive(true)
   const touchOff = () => setActive(false)
 
-  const handleTouch = touchHandler({outerCircleRef, innerCircleRef, portalRef, setHue, setRealEvent, touchOn})
+  const handleTouch = touchHandler({outerCircleRef, innerCircleRef, portalRef, setHue, setRealEvent, touchOn, enabled})
   const handlePress = event => {
     setRealEvent(true)
     setEnabled(!enabled)
@@ -40,7 +40,7 @@ export default ({hue: hueProp=0, enabled: enabledProp=false, onChange}) => {
 
   return (
     <>
-      <section ref={containerRef} className={classnames(container, {[activeStyle]: active})} onTouchStart={handleTouch} onTouchMove={handleTouch} onTouchEnd={touchOff}>
+      <section ref={containerRef} className={classnames(container, {[activeStyle]: active, [disabled]: !enabled})} onTouchStart={handleTouch} onTouchMove={handleTouch} onTouchEnd={touchOff}>
         <section ref={outerCircleRef} className={outerCircle}></section>
         <section ref={portalRef} className={portal} style={portalPosition}></section>
         <section ref={innerCircleRef} className={innerMaskingCircle}></section>
