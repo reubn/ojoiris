@@ -5,34 +5,34 @@ import calculateSizing from './calculateSizing'
 import touchHandler from './touchHandler'
 import syncPropsToState from './syncPropsToState'
 import syncStateToOnChange from './syncStateToOnChange'
-import syncStateToPortal from './syncStateToPortal'
+import syncStateToHandle from './syncStateToHandle'
 import keepStill from './keepStill'
 
 import BrightnessIcon from './BrightnessIcon'
 
-import {outerCircle, container, innerMaskingCircle, innerIndicatorCircle, indicatorMaskingCircle, portal, active as activeStyle, disabled} from './style'
+import {outerCircle, container, innerMaskingCircle, innerIndicatorCircle, indicatorMaskingCircle, handle, active as activeStyle, disabled} from './style'
 
 
 export default ({hue: hueProp=0, enabled: enabledProp=false, onChange}) => {
-  const containerRef = useRef(), outerCircleRef = useRef(), innerCircleRef = useRef(), portalRef = useRef()
+  const containerRef = useRef(), outerCircleRef = useRef(), innerCircleRef = useRef(), handleRef = useRef()
 
   const [hue, setHue] = useState(hueProp)
   const [enabled, setEnabled] = useState(enabledProp)
   const [realEvent, setRealEvent] = useState(false)
 
   const [active, setActive] = useState(false)
-  const [portalPosition, setPortalPosition] = useState({left: null, bottom: null})
+  const [handlePosition, setHandlePosition] = useState({left: null, bottom: null})
 
   useEffect(syncPropsToState({setRealEvent, setHue, hueProp, setEnabled, enabledProp}), [hueProp, enabledProp])
   useEffect(syncStateToOnChange({realEvent, onChange, hue, enabled}), [hue, enabled])
-  useEffect(syncStateToPortal({containerRef, innerCircleRef, hue, setPortalPosition}), [hue, enabled])
+  useEffect(syncStateToHandle({containerRef, innerCircleRef, hue, setHandlePosition}), [hue, enabled])
 
   useEffect(keepStill(containerRef), [])
 
   const touchOn = () => setActive(true)
   const touchOff = () => setActive(false)
 
-  const handleTouch = touchHandler({outerCircleRef, containerRef, innerCircleRef, portalRef, setHue, setRealEvent, touchOn, enabled})
+  const handleTouch = touchHandler({outerCircleRef, containerRef, innerCircleRef, handleRef, setHue, setRealEvent, touchOn, enabled})
   const handlePress = event => {
     setRealEvent(true)
     setEnabled(!enabled)
@@ -42,7 +42,8 @@ export default ({hue: hueProp=0, enabled: enabledProp=false, onChange}) => {
     <>
       <section ref={containerRef} className={classnames(container, {[activeStyle]: active, [disabled]: !enabled})} onTouchStart={handleTouch} onTouchMove={handleTouch} onTouchEnd={touchOff}>
         <section ref={outerCircleRef} className={outerCircle}></section>
-        <section ref={portalRef} className={portal} style={portalPosition}></section>
+        <section ref={handleRef} className={handle} style={handlePosition}></section>
+
         <section className={innerMaskingCircle}></section>
         <section ref={innerCircleRef} className={innerMaskingCircle} style={{opacity: 0, transition: 'none'}}></section>
         <section className={innerIndicatorCircle} style={{background: `hsl(${hue}, 100%, 50%)`}}></section>

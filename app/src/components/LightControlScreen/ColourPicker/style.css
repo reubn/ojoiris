@@ -76,7 +76,7 @@
 }
 
 
-.portal{
+.handle{
   position: absolute;
   transform: translate(-50%, 50%) rotate(var(--angle));
   transform-origin: center;
