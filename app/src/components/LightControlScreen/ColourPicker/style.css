@@ -87,7 +87,7 @@
   background: #fff;
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.04) 0 0 0.5rem 0;
-  transition: height 0.25s ease 0s;
+  transition: height 0.2s cubic-bezier(0.335, 0.880, 0.450, 0.940);
 
   &:active, .active & {
     height: 10%;
@@ -95,6 +95,6 @@
 
   .disabled & {
     height: 0;
-    transition: height 0.25s ease 0.25s, left 0s ease 0.25s, bottom 0s ease 0.25s;
+    transition: height 0.25s ease, left 0s ease 0.25s, bottom 0s ease 0.25s;
   }
 }
