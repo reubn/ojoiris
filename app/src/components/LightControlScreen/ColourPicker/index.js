@@ -13,7 +13,7 @@ import BrightnessIcon from './BrightnessIcon'
 import {outerCircle, container, innerMaskingCircle, innerIndicatorCircle, indicatorMaskingCircle, handle, active as activeStyle, disabled} from './style'
 
 
-export default ({hue: hueProp=0, enabled: enabledProp=false, onChange}) => {
+export default ({hue: hueProp=0, brightness: brightnessProp=0, enabled: enabledProp=false, onChange}) => {
   const containerRef = useRef(), outerCircleRef = useRef(), innerCircleRef = useRef(), handleRef = useRef()
 
   const [hue, setHue] = useState(hueProp)
@@ -46,9 +46,9 @@ export default ({hue: hueProp=0, enabled: enabledProp=false, onChange}) => {
 
         <section ref={innerCircleRef} className={innerMaskingCircle}></section>
 
-        <section className={innerIndicatorCircle} style={{background: `hsl(${hue}, 100%, 50%)`}}></section>
+        <section className={innerIndicatorCircle} style={{background: `hsl(${hue}, 100%, ${50 * brightnessProp}%)`}}></section>
         <section className={indicatorMaskingCircle} onTouchEnd={handlePress}>
-          <BrightnessIcon brightness={enabled ? 1 : 0} />
+          <BrightnessIcon brightness={enabled ? brightnessProp : 0} />
         </section>
 
       </section>

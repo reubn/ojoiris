@@ -1,0 +1,34 @@
+.container{
+  display: flex;
+    width: 80vw;
+    height: 8.75vw;
+    padding: 0;
+    margin-top: 5rem;
+    user-select: none;
+    box-shadow: rgba(0, 0, 0, 0.05) 0 0 0.5rem 0;
+    border-radius: 1.25rem;
+    background: linear-gradient(to right, black, hsl(var(--hue), 100%, 50%));
+    align-items: center;
+}
+
+.handle{
+  border-radius: 8px;
+  display: block;
+  width: 1.75%;
+  height: 50%;
+  background: #fff;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.04) 0 0 0.5rem 0;
+  transition: height 0.2s cubic-bezier(0.335, 0.880, 0.450, 0.940);
+  position: relative;
+  transform: translateX(-50%);
+
+  &:active, .active & {
+    height: 70%;
+  }
+
+  .disabled & {
+    height: 16%;
+    transition: left 0.2s cubic-bezier(0.335, 0.880, 0.450, 0.940);
+  }
+}
