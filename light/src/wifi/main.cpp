@@ -146,7 +146,7 @@ void initialiseWifi(ConfigurableSettings& settings){
 
     if(server.hasArg("brightness")){
       std::string arg = server.arg("brightness").c_str();
-      settings.maxBrightness = atoi(arg.c_str());
+      settings.globalBrightness = atoi(arg.c_str());
     }
 
     if(server.hasArg("red")){
@@ -180,7 +180,7 @@ void initialiseWifi(ConfigurableSettings& settings){
       "green " + String(settings.green) + "\n" +
       "red " + String(settings.red) + "\n" +
       "show " + String(settings.showId) + "\n" +
-      "brightness " + String(settings.maxBrightness) + "\n" +
+      "brightness " + String(settings.globalBrightness) + "\n" +
       "topHold " + String(settings.topHold) + "\n" +
       "bottomHold " + String(settings.bottomHold) + "\n" +
       "transitionLength " + String(settings.transitionLength) + "\n" +
