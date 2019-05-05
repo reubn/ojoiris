@@ -1,7 +1,7 @@
 import calculateSizing from './calculateSizing'
 
-export default ({containerRef, innerCircleRef, hue, setHandlePosition}) => () => {
-  const {outerRadius, midlineRadius} = calculateSizing({containerRef, innerCircleRef})
+export default ({outerCircleRef, innerCircleRef, hue, setHandlePosition}) => () => {
+  const {outerRadius, midlineRadius} = calculateSizing({outerCircleRef, innerCircleRef})
   const colourRadians = (hue * Math.PI) / 180
 
   setHandlePosition({

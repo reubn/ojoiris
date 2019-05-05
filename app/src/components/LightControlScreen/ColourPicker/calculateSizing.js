@@ -1,10 +1,26 @@
-export default ({containerRef, innerCircleRef}) => {
-  const {x: containerX, y: containerY, width: widthOuter, height: heightOuter} = containerRef.current.getBoundingClientRect()
-  const {width: widthInner, height: heightInner} = innerCircleRef.current.getBoundingClientRect()
+const duplicate = node => {
+  if(node.copy) return node.copy
+
+  const copy = node.cloneNode()
+  copy.style.transition = 'none'
+  copy.style.visibility = 'hidden'
+
+  node.parentNode.appendChild(copy)
+  node.copy = copy
+
+  return copy
+}
+
+export default ({outerCircleRef, innerCircleRef}) => {
+  const outerCircle = duplicate(outerCircleRef.current)
+  const innerCircle = duplicate(innerCircleRef.current)
+
+  const {width: widthOuter, height: heightOuter, x: baseX, y: baseY} = outerCircle.getBoundingClientRect()
+  const {width: widthInner, height: heightInner} = innerCircle.getBoundingClientRect()
 
   const [centerX, centerY] = [
-    containerX + (widthOuter / 2),
-    containerY + (heightOuter / 2)
+    baseX + (widthOuter / 2),
+    baseY + (heightOuter / 2)
   ]
 
   const [outerRadius, innerRadius] = [widthOuter / 2, widthInner / 2]

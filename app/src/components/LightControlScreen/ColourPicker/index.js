@@ -25,14 +25,14 @@ export default ({hue: hueProp=0, enabled: enabledProp=false, onChange}) => {
 
   useEffect(syncPropsToState({setRealEvent, setHue, hueProp, setEnabled, enabledProp}), [hueProp, enabledProp])
   useEffect(syncStateToOnChange({realEvent, onChange, hue, enabled}), [hue, enabled])
-  useEffect(syncStateToHandle({containerRef, innerCircleRef, hue, setHandlePosition}), [hue, enabled])
+  useEffect(syncStateToHandle({outerCircleRef, innerCircleRef, hue, setHandlePosition}), [hue, enabled])
 
   useEffect(keepStill(containerRef), [])
 
   const touchOn = () => setActive(true)
   const touchOff = () => setActive(false)
 
-  const handleTouch = touchHandler({outerCircleRef, containerRef, innerCircleRef, handleRef, setHue, setRealEvent, touchOn, enabled})
+  const handleTouch = touchHandler({outerCircleRef, innerCircleRef, handleRef, setHue, setRealEvent, touchOn, enabled})
   const handlePress = event => {
     setRealEvent(true)
     setEnabled(!enabled)
@@ -44,8 +44,7 @@ export default ({hue: hueProp=0, enabled: enabledProp=false, onChange}) => {
         <section ref={outerCircleRef} className={outerCircle}></section>
         <section ref={handleRef} className={handle} style={handlePosition}></section>
 
-        <section className={innerMaskingCircle}></section>
-        <section ref={innerCircleRef} className={innerMaskingCircle} style={{opacity: 0, transition: 'none'}}></section> {/*Duplicate w/o transition, so measurements are correct at point of state change*/}
+        <section ref={innerCircleRef} className={innerMaskingCircle}></section>
 
         <section className={innerIndicatorCircle} style={{background: `hsl(${hue}, 100%, 50%)`}}></section>
         <section className={indicatorMaskingCircle} onTouchEnd={handlePress}>

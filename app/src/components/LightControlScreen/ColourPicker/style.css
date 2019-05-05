@@ -87,7 +87,7 @@
   background: #fff;
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.04) 0 0 0.5rem 0;
-  transition: height 0.25s ease;
+  transition: height 0.25s ease 0s;
 
   &:active, .active & {
     height: 10%;
@@ -95,5 +95,6 @@
 
   .disabled & {
     height: 0;
+    transition: height 0.25s ease 0.25s, left 0s ease 0.25s, bottom 0s ease 0.25s;
   }
 }
