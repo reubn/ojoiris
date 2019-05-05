@@ -11,10 +11,10 @@ import keepStill from './keepStill'
 import {container, handle, active as activeStyle, disabled} from './style'
 
 
-export default ({hue: hueProp, brightness: brightnessProp=0, enabled=false, onChange}) => {
+export default ({hue, brightness: brightnessProp=0, enabled=false, onChange}) => {
   const containerRef = useRef(), handleRef = useRef()
 
-  const [brightness, setBrightness] = useState(brightnessProp)
+  const [brightness, setBrightness] = useState(brightnessProp / 255)
   const [realEvent, setRealEvent] = useState(false)
 
   const [active, setActive] = useState(false)
@@ -33,7 +33,7 @@ export default ({hue: hueProp, brightness: brightnessProp=0, enabled=false, onCh
 
 
   return (
-    <section ref={containerRef} style={{'--hue': `${hueProp}deg`}} className={classnames(container, {[activeStyle]: active, [disabled]: !enabled})} onTouchStart={handleTouch} onTouchMove={handleTouch} onTouchEnd={touchOff}>
+    <section ref={containerRef} style={{'--hue': `${hue / 255 * 360}deg`}} className={classnames(container, {[activeStyle]: active, [disabled]: !enabled})} onTouchStart={handleTouch} onTouchMove={handleTouch} onTouchEnd={touchOff}>
       <section ref={handleRef} className={handle} style={handlePosition}></section>
     </section>
   )

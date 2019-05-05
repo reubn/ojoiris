@@ -8,15 +8,13 @@ import syncStateToOnChange from './syncStateToOnChange'
 import syncStateToHandle from './syncStateToHandle'
 import keepStill from './keepStill'
 
-import BrightnessIcon from './BrightnessIcon'
-
 import {outerCircle, container, innerMaskingCircle, innerIndicatorCircle, indicatorMaskingCircle, handle, active as activeStyle, disabled} from './style'
 
 
-export default ({hue: hueProp=0, brightness: brightnessProp=0, enabled: enabledProp=false, onChange}) => {
+export default ({hue: hueProp=0, brightness: brightnessProp=0, enabled: enabledProp=false, onChange, children}) => {
   const containerRef = useRef(), outerCircleRef = useRef(), innerCircleRef = useRef(), handleRef = useRef()
 
-  const [hue, setHue] = useState(hueProp)
+  const [hue, setHue] = useState(hueProp / 255 * 360)
   const [enabled, setEnabled] = useState(enabledProp)
   const [realEvent, setRealEvent] = useState(false)
 
@@ -46,9 +44,9 @@ export default ({hue: hueProp=0, brightness: brightnessProp=0, enabled: enabledP
 
         <section ref={innerCircleRef} className={innerMaskingCircle}></section>
 
-        <section className={innerIndicatorCircle} style={{background: `hsl(${hue}, 100%, ${50 * brightnessProp}%)`}}></section>
+        <section className={innerIndicatorCircle} style={{background: `hsl(${hue}, 100%, ${50 * brightnessProp / 255}%)`}}></section>
         <section className={indicatorMaskingCircle} onTouchEnd={handlePress}>
-          <BrightnessIcon brightness={enabled ? brightnessProp : 0} />
+          {children}
         </section>
 
       </section>

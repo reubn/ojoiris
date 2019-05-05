@@ -9,5 +9,5 @@ export default ({containerRef, handleRef, setBrightness, setRealEvent, touchOn, 
   const {clientX: eventAbsoluteX} = event.touches[0]
 
   setRealEvent(true)
-  setBrightness(Math.max(0, Math.min(100 * (eventAbsoluteX - x) / width, 100)))
+  setBrightness(Math.max(0, Math.min((eventAbsoluteX - x) / width, 1)))
 }
