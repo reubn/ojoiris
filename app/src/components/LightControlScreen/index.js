@@ -21,10 +21,13 @@ export default () => {
   const {state} = useMappedState(mapState)
 
   const [localState, setLocalState] = useState(state)
+  const [lastOnValue, setLastOnValue] = useState(255)
   const [ignoreAsIsDuplicate, setIgnoreAsIsDuplicate] = useState(false)
 
   // Update on state changes
   useEffect(() => {
+    if(state.value) setLastOnValue(state.value)
+
     setLocalState(state)
     setIgnoreAsIsDuplicate(true) // Prevent Loop
   }, [state])
@@ -42,6 +45,7 @@ export default () => {
     if(hue !== null) newState.hue = hue
 
     if(brightness !== null) {
+      setLastOnValue(brightness)
       newState.value = brightness
 
       if(newState.value > 0) newState.enabled = true
@@ -52,6 +56,7 @@ export default () => {
     if(enabled !== null) {
       newState.enabled = enabled
       if(!enabled) newState.value = 0
+      else newState.value = lastOnValue
     }
 
     setLocalState(newState)
