@@ -11,7 +11,7 @@ import keepStill from './keepStill'
 import {outerCircle, container, innerMaskingCircle, innerIndicatorCircle, indicatorMaskingCircle, handle, active as activeStyle, disabled} from './style'
 
 
-export default ({hue: hueProp=0, brightness: brightnessProp=0, enabled: enabledProp=false, onChange, children}) => {
+export default ({hue: hueProp=0, value: valueProp=0, enabled: enabledProp=false, onChange, children}) => {
   const containerRef = useRef(), outerCircleRef = useRef(), innerCircleRef = useRef(), handleRef = useRef()
 
   const [hue, setHue] = useState(hueProp / 255 * 360)
@@ -44,7 +44,7 @@ export default ({hue: hueProp=0, brightness: brightnessProp=0, enabled: enabledP
 
         <section ref={innerCircleRef} className={innerMaskingCircle}></section>
 
-        <section className={innerIndicatorCircle} style={{background: `hsl(${hue}, 100%, ${50 * brightnessProp / 255}%)`}}></section>
+        <section className={innerIndicatorCircle} style={{background: `hsl(${hue}, 100%, ${50 * valueProp / 255}%)`}}></section>
         <section className={indicatorMaskingCircle} onTouchEnd={handlePress}>
           {children}
         </section>

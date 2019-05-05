@@ -14,7 +14,7 @@ export default text => text.trim().split('\n').reduce((object, line) => {
 
 
 // show 2
-// brightness 255
+// value 255
 // topHold 2750
 // bottomHold 1750
 // transitionLength 3250

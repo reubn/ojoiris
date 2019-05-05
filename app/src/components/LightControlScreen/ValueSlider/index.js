@@ -11,25 +11,25 @@ import keepStill from './keepStill'
 import {container, handle, active as activeStyle, disabled} from './style'
 
 
-export default ({hue, brightness: brightnessProp=0, enabled=false, onChange}) => {
+export default ({hue, value: valueProp=0, enabled=false, onChange}) => {
   const containerRef = useRef(), handleRef = useRef()
 
-  const [brightness, setBrightness] = useState(brightnessProp / 255)
+  const [value, setValue] = useState(valueProp / 255)
   const [realEvent, setRealEvent] = useState(false)
 
   const [active, setActive] = useState(false)
   const [handlePosition, setHandlePosition] = useState({left: null})
 
-  useEffect(syncPropsToState({setRealEvent, setBrightness, brightnessProp, active}), [brightnessProp, active])
-  useEffect(syncStateToOnChange({realEvent, onChange, brightness}), [brightness])
-  useEffect(syncStateToHandle({containerRef, brightness, setHandlePosition}), [brightness, enabled])
+  useEffect(syncPropsToState({setRealEvent, setValue, valueProp, active}), [valueProp, active])
+  useEffect(syncStateToOnChange({realEvent, onChange, value}), [value])
+  useEffect(syncStateToHandle({containerRef, value, setHandlePosition}), [value, enabled])
 
   useEffect(keepStill(containerRef), [])
 
   const touchOn = () => setActive(true)
   const touchOff = () => setActive(false)
 
-  const handleTouch = touchHandler({containerRef, handleRef, setBrightness, setRealEvent, touchOn})
+  const handleTouch = touchHandler({containerRef, handleRef, setValue, setRealEvent, touchOn})
 
 
   return (
