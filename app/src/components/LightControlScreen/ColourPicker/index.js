@@ -23,7 +23,7 @@ export default ({hue: hueProp=0, enabled: enabledProp=false, onChange}) => {
   const [active, setActive] = useState(false)
   const [handlePosition, setHandlePosition] = useState({left: null, bottom: null})
 
-  useEffect(syncPropsToState({setRealEvent, setHue, hueProp, setEnabled, enabledProp}), [hueProp, enabledProp])
+  useEffect(syncPropsToState({setRealEvent, setHue, hueProp, setEnabled, enabledProp, active}), [hueProp, enabledProp, active])
   useEffect(syncStateToOnChange({realEvent, onChange, hue, enabled}), [hue, enabled])
   useEffect(syncStateToHandle({outerCircleRef, innerCircleRef, hue, setHandlePosition}), [hue, enabled])
 
