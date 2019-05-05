@@ -32,12 +32,11 @@ export default () => {
   }, [localState])
 
   const handleChange = ({hue, enabled}) => {
-    const [red, green, blue] = hsl2rgb([hue, 100, 50]).map(n => Math.round(n))
-    setLocalState({...localState, red, green, blue, enabled})
+    setLocalState({...localState, hue: Math.round((255 * hue / 360)), enabled})
     setIgnoreAsIsDuplicate(false)
   }
 
-  const hue = rgb2hsl([localState.red, localState.green, localState.blue])[0]
+  const hue = 360 * localState.hue / 255
 
   return (
     <section className={screen}>

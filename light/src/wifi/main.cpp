@@ -149,19 +149,19 @@ void initialiseWifi(ConfigurableSettings& settings){
       settings.globalBrightness = atoi(arg.c_str());
     }
 
-    if(server.hasArg("red")){
-      std::string arg = server.arg("red").c_str();
-      settings.red = atoi(arg.c_str());
+    if(server.hasArg("hue")){
+      std::string arg = server.arg("hue").c_str();
+      settings.hue = atoi(arg.c_str());
     }
 
-    if(server.hasArg("green")){
-      std::string arg = server.arg("green").c_str();
-      settings.green = atoi(arg.c_str());
+    if(server.hasArg("saturation")){
+      std::string arg = server.arg("saturation").c_str();
+      settings.saturation = atoi(arg.c_str());
     }
 
-    if(server.hasArg("blue")){
-      std::string arg = server.arg("blue").c_str();
-      settings.blue = atoi(arg.c_str());
+    if(server.hasArg("value")){
+      std::string arg = server.arg("value").c_str();
+      settings.value = atoi(arg.c_str());
     }
 
     if(server.hasArg("enabled")){
@@ -176,9 +176,9 @@ void initialiseWifi(ConfigurableSettings& settings){
 
     String response =
       // "HMAC " + String((char*)HMAC) + "\n" +
-      "blue " + String(settings.blue) + "\n" +
-      "green " + String(settings.green) + "\n" +
-      "red " + String(settings.red) + "\n" +
+      "value " + String(settings.value) + "\n" +
+      "saturation " + String(settings.saturation) + "\n" +
+      "hue " + String(settings.hue) + "\n" +
       "show " + String(settings.showId) + "\n" +
       "brightness " + String(settings.globalBrightness) + "\n" +
       "topHold " + String(settings.topHold) + "\n" +

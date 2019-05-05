@@ -19,7 +19,7 @@ struct ConfigurableSettings {
 
   int showId = 0;
 
-  int red = 255;
-  int green = 0;
-  int blue = 255;
+  int hue = 16;
+  int saturation = 255;
+  int value = 255;
 };

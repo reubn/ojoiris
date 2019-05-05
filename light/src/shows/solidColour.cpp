@@ -9,49 +9,48 @@
 #include "solidColour.hpp"
 
 void loopSolidColour(ConfigurableSettings& settings) {
-  static int headingTowardsRed = settings.red;
-  static int headingTowardsGreen = settings.green;
-  static int headingTowardsBlue = settings.blue;
+  static int headingTowardsHue = settings.hue;
+  static int headingTowardsSaturation = settings.saturation;
+  static int headingTowardsValue = settings.value;
 
-  static int incrementPerFrameRed = 0;
-  static int incrementPerFrameGreen = 0;
-  static int incrementPerFrameBlue = 0;
+  static int incrementPerFrameHue = 0;
+  static int incrementPerFrameSaturation = 0;
+  static int incrementPerFrameValue = 0;
 
   static unsigned long lastExecution = millis();
-  static int currentRed = settings.red;
-  static int currentGreen = settings.green;
-  static int currentBlue = settings.blue;
+  static int currentHue = settings.hue;
+  static int currentSaturation = settings.saturation;
+  static int currentValue = settings.value;
 
-  if(settings.red != headingTowardsRed || settings.green != headingTowardsGreen || settings.blue != headingTowardsBlue){
-    headingTowardsRed = settings.red;
-    headingTowardsGreen = settings.green;
-    headingTowardsBlue = settings.blue;
+  if(settings.hue != headingTowardsHue || settings.saturation != headingTowardsSaturation || settings.value != headingTowardsValue){
+    headingTowardsHue = settings.hue;
+    headingTowardsSaturation = settings.saturation;
+    headingTowardsValue = settings.value;
 
-    int deltaRed = headingTowardsRed - currentRed;
-    int deltaGreen = headingTowardsGreen - currentGreen;
-    int deltaBlue = headingTowardsBlue - currentBlue;
+    int deltaHue = headingTowardsHue - currentHue;
+    int deltaSaturation = headingTowardsSaturation - currentSaturation;
+    int deltaValue = headingTowardsValue - currentValue;
 
-    float transitionDuration = (abs(deltaRed) + abs(deltaGreen) + abs(deltaBlue)) * 2;
-    float numberOfFramesNeeded = transitionDuration / settings.fps;
+    if(abs(deltaHue) > 128) deltaHue = 255 - deltaHue;
 
-    incrementPerFrameRed = deltaRed / numberOfFramesNeeded;
-    incrementPerFrameGreen = deltaGreen / numberOfFramesNeeded;
-    incrementPerFrameBlue = deltaBlue / numberOfFramesNeeded;
+    incrementPerFrameHue = deltaHue / (abs(2 * deltaHue / 255) / settings.fps);
+    incrementPerFrameSaturation = deltaSaturation / (abs(2 * deltaSaturation / 255) / settings.fps);
+    incrementPerFrameValue = deltaValue / (abs(2 * deltaValue / 255) / settings.fps);
   }
 
   if(millis() >= lastExecution + settings.fps){
-    LEDS.setBrightness(settings.globalBrightness);
     if(settings.enabled){
-      if(((incrementPerFrameRed > 0) && (currentRed < headingTowardsRed)) || ((incrementPerFrameRed < 0) && (currentRed > headingTowardsRed))) currentRed += incrementPerFrameRed;
-      else currentRed = headingTowardsRed;
+      if(((incrementPerFrameHue > 0) && (currentHue < headingTowardsHue)) || ((incrementPerFrameHue < 0) && (currentHue > headingTowardsHue))) currentHue += incrementPerFrameHue;
+      else currentHue = headingTowardsHue;
 
-      if(((incrementPerFrameGreen > 0) && (currentGreen < headingTowardsGreen)) || ((incrementPerFrameGreen < 0) && (currentGreen > headingTowardsGreen))) currentGreen += incrementPerFrameGreen;
-      else currentGreen = headingTowardsGreen;
+      if(((incrementPerFrameSaturation > 0) && (currentSaturation < headingTowardsSaturation)) || ((incrementPerFrameSaturation < 0) && (currentSaturation > headingTowardsSaturation))) currentSaturation += incrementPerFrameSaturation;
+      else currentSaturation = headingTowardsSaturation;
 
-      if(((incrementPerFrameBlue > 0) && (currentBlue < headingTowardsBlue)) || ((incrementPerFrameBlue < 0) && (currentBlue > headingTowardsBlue))) currentBlue += incrementPerFrameBlue;
-      else currentBlue = headingTowardsBlue;
+      if(((incrementPerFrameValue > 0) && (currentValue < headingTowardsValue)) || ((incrementPerFrameValue < 0) && (currentValue > headingTowardsValue))) currentValue += incrementPerFrameValue;
+      else currentValue = headingTowardsValue;
 
-      for(auto& ringLED : allLEDs) rawLEDs[ringLED.index] = CRGB(currentRed, currentGreen, currentBlue);
+      LEDS.setBrightness(currentValue);
+      for(auto& ringLED : allLEDs) rawLEDs[ringLED.index] = CHSV(currentHue, currentSaturation, 255);
     }
     else for(auto& ringLED : allLEDs) rawLEDs[ringLED.index] = CRGB(0, 0, 0);
   	FastLED.show();
