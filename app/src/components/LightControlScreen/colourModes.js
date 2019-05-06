@@ -26,15 +26,10 @@ export default {
 
       const [red, green, blue] = kelvinToRGB(kelvin)
       const [hue, saturation] = rgb2hsv([red, green, blue])
-      const [sliderSaturation, sliderLightness] = rgb2hsl([red, green, blue])
 
       return {
-        hue,
-        saturation: saturation / 100 * 255,
-        meta: {
-          sliderSaturation: 50,
-          sliderLightness: Math.max(sliderLightness, 240) / 255 * 100
-        }
+        hue: hue / 360 * 255,
+        saturation: saturation / 100 * 255
       }
     }
   }

@@ -1,6 +1,8 @@
 import React, {useRef, useEffect, useState} from 'react'
 import classnames from 'classnames'
 
+import colourToCSS from '../../../util/colourToCSS'
+
 import calculateSizing from './calculateSizing'
 import touchHandler from './touchHandler'
 import syncPropsToState from './syncPropsToState'
@@ -50,7 +52,7 @@ export default ({colour, enabled: enabledProp, onChange, config: {backgroundCSS,
 
         <section ref={innerCircleRef} className={innerMaskingCircle}></section>
 
-        <section className={innerIndicatorCircle} style={{background: `hsl(${localColour.hue / 255 * 360}, ${localColour.saturation / 255 * 100}%, ${50 * localColour.value / 255}%)`}}></section>
+        <section className={innerIndicatorCircle} style={{background: colourToCSS(localColour)}}></section>
         <section className={indicatorMaskingCircle} onTouchEnd={handlePress}>
           {children}
         </section>

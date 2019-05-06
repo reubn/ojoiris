@@ -1,6 +1,8 @@
 import React, {useRef, useEffect, useState} from 'react'
 import classnames from 'classnames'
 
+import colourToCSS from '../../../util/colourToCSS'
+
 import calculateSizing from './calculateSizing'
 import touchHandler from './touchHandler'
 import syncPropsToState from './syncPropsToState'
@@ -34,7 +36,7 @@ export default ({colour, enabled=false, onChange}) => {
   return (
     <section
      ref={containerRef}
-     style={{'--colour': `hsl(${colour.hue / 255 * 360}, ${colour.meta.sliderSaturation || colour.saturation / 255 * 100}%, ${colour.meta.sliderLightness || 50}%)`}}
+     style={{'--colour': colourToCSS(colour)}}
      className={classnames(container, {[activeStyle]: active, [disabled]: !enabled})}
      onTouchStart={handleTouch}
      onTouchMove={handleTouch}
