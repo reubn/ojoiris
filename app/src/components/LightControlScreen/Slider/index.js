@@ -13,7 +13,7 @@ import keepStill from './keepStill'
 import {container, handle, active as activeStyle, disabled} from './style'
 
 
-export default ({colour, enabled=false, onChange}) => {
+export default ({colour, enabled=false, onChange, property, style}) => {
   const containerRef = useRef(), handleRef = useRef()
 
   const [value, setValue] = useState(colour.value / 255)
@@ -22,8 +22,8 @@ export default ({colour, enabled=false, onChange}) => {
   const [active, setActive] = useState(false)
   const [handlePosition, setHandlePosition] = useState({left: null})
 
-  useEffect(syncPropsToState({setRealEvent, setValue, colour, active}), [colour, active])
-  useEffect(syncStateToOnChange({realEvent, onChange, value}), [value])
+  useEffect(syncPropsToState({setRealEvent, setValue, colour, active, property}), [colour, active])
+  useEffect(syncStateToOnChange({realEvent, onChange, value, property}), [value])
   useEffect(syncStateToHandle({containerRef, value, setHandlePosition}), [value, enabled])
 
   useEffect(keepStill(containerRef), [])
@@ -36,7 +36,7 @@ export default ({colour, enabled=false, onChange}) => {
   return (
     <section
      ref={containerRef}
-     style={{'--colour': colourToCSS({...colour, value: 255})}}
+     style={{...style, '--colour': colourToCSS({...colour, [property]: 255})}}
      className={classnames(container, {[activeStyle]: active, [disabled]: !enabled})}
      onTouchStart={handleTouch}
      onTouchMove={handleTouch}

@@ -9,7 +9,7 @@ import lightState from '../../store/actions/lightState'
 import HueWheel from './HueWheel'
 import ValueIcon from './ValueIcon'
 
-import ValueSlider from './ValueSlider'
+import Slider from './Slider'
 
 import colourModes from './colourModes'
 
@@ -79,7 +79,8 @@ export default () => {
       <HueWheel colour={colour} enabled={localState.enabled} onChange={handleChange} config={colourModes[mode ? 'colour' : 'white']}>
         <ValueIcon colour={colour} />
       </HueWheel>
-      <ValueSlider colour={colour} enabled={localState.enabled} onChange={handleChange}/>
+      <Slider property="value" colour={colour} enabled={localState.enabled} onChange={handleChange} style={{background: 'linear-gradient(to right, black, var(--colour))'}}/>
+      <Slider property="saturation" colour={colour} enabled={localState.enabled} onChange={handleChange} style={{background: 'linear-gradient(to right, white, var(--colour))'}}/>
     </section>
   )
 }
