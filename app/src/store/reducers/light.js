@@ -16,10 +16,17 @@ export default (state=inital, {type, payload={}, ...action}) => {
     status: searching
   }
 
-  if(type === 'LIGHT_SEARCHING_FOUND' || type === 'LIGHT_SEARCHING_NOT_FOUND') return {
+  if(type === 'LIGHT_SEARCHING_FOUND') return {
     ...state,
     status: notSearching,
     searchCount: state.searchCount + 1
+  }
+
+  if(type === 'LIGHT_SEARCHING_NOT_FOUND') return {
+    ...state,
+    status: notSearching,
+    searchCount: state.searchCount + 1,
+    state: {}
   }
 
   return state
