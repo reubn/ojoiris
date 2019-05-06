@@ -1,6 +1,6 @@
 import calculateSizing from './calculateSizing'
 
-export default ({outerCircleRef, innerCircleRef, handleRef, localColour, setLocalColour, angleToColour, setRealEvent, touchOn, enabled, setSide}) => event => {
+export default ({outerCircleRef, innerCircleRef, handleRef, localColour, setLocalColour, angleToColour, setRealEvent, touchOn, enabled, setEventInfo}) => event => {
   if(!enabled || (event.target !== outerCircleRef.current && event.target !== handleRef.current)) return
   touchOn()
 
@@ -15,6 +15,9 @@ export default ({outerCircleRef, innerCircleRef, handleRef, localColour, setLoca
   const colourDegrees = (360 + Math.round(colourRadians / Math.PI * 180)) % 360
 
   setRealEvent(true)
-  setSide(eventAbsoluteX > centerX ? 1 : 2)
+  setEventInfo({
+    angle: colourDegrees,
+    side: eventAbsoluteX > centerX ? 1 : 2
+  })
   setLocalColour({...localColour, ...angleToColour(colourDegrees)})
 }

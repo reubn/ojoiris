@@ -13,7 +13,9 @@ export default {
   },
   white: {
     backgroundCSS: 'linear-gradient(to bottom, rgb(255, 111, 0), rgb(255, 154, 60), rgb(255, 184, 125), rgb(255, 207, 169), rgb(255, 226, 203), rgb(255, 242, 230), rgb(255, 251, 255), rgb(230, 235, 255), rgb(217, 227, 255), rgb(208, 222, 255))',
-    colourToAngle: ({hue, saturation}, side=1) => {
+    colourToAngle: ({hue, saturation}, {angle, side}) => {
+      if(angle || angle === 0) return angle // HACK - there will be 2 possible positions on circle - impossible to resolve ∴ just use event angle
+
       const [red, green, blue] = hsv2rgb([hue, saturation / 255 * 100, 100])
       const kelvin = Math.abs(RGBToKelvin([red, green, blue]))
 

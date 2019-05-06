@@ -17,22 +17,22 @@ export default ({colour, enabled: enabledProp, onChange, config: {backgroundCSS,
 
   const [localColour, setLocalColour] = useState(colour)
   const [enabled, setEnabled] = useState(enabledProp)
-  const [side, setSide] = useState(1)
+  const [eventInfo, setEventInfo] = useState({})
   const [realEvent, setRealEvent] = useState(false)
 
   const [active, setActive] = useState(false)
   const [handlePosition, setHandlePosition] = useState({left: null, bottom: null})
 
-  useEffect(syncPropsToState({setRealEvent, setLocalColour, colour, setEnabled, enabledProp, active}), [colour, enabledProp, active])
+  useEffect(syncPropsToState({setRealEvent, setLocalColour, colour, setEnabled, enabledProp, active, eventInfo, setEventInfo}), [colour, enabledProp, active])
   useEffect(syncStateToOnChange({realEvent, onChange, localColour, enabled}), [localColour, enabled])
-  useEffect(syncStateToHandle({outerCircleRef, innerCircleRef, localColour, colourToAngle, setHandlePosition, side}), [localColour])
+  useEffect(syncStateToHandle({outerCircleRef, innerCircleRef, localColour, colourToAngle, setHandlePosition, eventInfo}), [localColour])
 
   useEffect(keepStill(containerRef), [])
 
   const touchOn = () => setActive(true)
   const touchOff = () => setActive(false)
 
-  const handleTouch = touchHandler({outerCircleRef, innerCircleRef, handleRef, localColour, setLocalColour, angleToColour, setRealEvent, touchOn, enabled, setSide})
+  const handleTouch = touchHandler({outerCircleRef, innerCircleRef, handleRef, localColour, setLocalColour, angleToColour, setRealEvent, touchOn, enabled, setEventInfo})
   const handlePress = event => {
     setRealEvent(true)
     setEnabled(!enabled)
