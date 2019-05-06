@@ -25,7 +25,7 @@ export default () => {
   const [localState, setLocalState] = useState(state)
   const [lastOnValue, setLastOnValue] = useState(255)
   const [mode, setMode] = useState(true)
-  const [ignoreAsIsDuplicate, setIgnoreAsIsDuplicate] = useState(false)
+  const [ignoreAsIsDuplicate, setIgnoreAsIsDuplicate] = useState(true)
 
   // Update on state changes
   useEffect(() => {
@@ -39,6 +39,13 @@ export default () => {
   useEffect(() => {
     if(!ignoreAsIsDuplicate) lightState(dispatch, localState)
   }, [localState])
+
+  useEffect(() => {
+    const handler = () => !document.hidden && dispatch({type: 'LIGHT_ONLINE_CHECK'})
+
+    document.addEventListener('visibilitychange', handler)
+    return () => document.removeEventListener('visibilitychange', handler)
+  }, [])
 
   const handleChange = ({colour: {hue=null, saturation=null, value=null}, enabled=null}) => {
     const newState = {
