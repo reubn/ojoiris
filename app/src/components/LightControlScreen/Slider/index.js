@@ -2,13 +2,13 @@ import React, {useRef, useEffect, useState} from 'react'
 import classnames from 'classnames'
 
 import colourToCSS from '../../../util/colourToCSS'
+import keepStill from '../../../hooks/keepStill'
 
 import calculateSizing from './calculateSizing'
 import touchHandler from './touchHandler'
 import syncPropsToState from './syncPropsToState'
 import syncStateToOnChange from './syncStateToOnChange'
 import syncStateToHandle from './syncStateToHandle'
-import keepStill from './keepStill'
 
 import {container, handle, active as activeStyle, disabled} from './style'
 

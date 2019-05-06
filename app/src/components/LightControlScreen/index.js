@@ -5,6 +5,7 @@ import rgb2hsl from 'pure-color/convert/rgb2hsl'
 import hsl2rgb from 'pure-color/convert/hsl2rgb'
 
 import lightState from '../../store/actions/lightState'
+import pageVisibilityUpdateState from '../../hooks/pageVisibilityUpdateState'
 
 import HueWheel from './HueWheel'
 import ValueIcon from './ValueIcon'
@@ -40,12 +41,7 @@ export default () => {
     if(!ignoreAsIsDuplicate) lightState(dispatch, localState)
   }, [localState])
 
-  useEffect(() => {
-    const handler = () => !document.hidden && dispatch({type: 'LIGHT_ONLINE_CHECK'})
-
-    document.addEventListener('visibilitychange', handler)
-    return () => document.removeEventListener('visibilitychange', handler)
-  }, [])
+  useEffect(pageVisibilityUpdateState(dispatch), [])
 
   const handleChange = ({colour: {hue=null, saturation=null, value=null}, enabled=null}) => {
     const newState = {
