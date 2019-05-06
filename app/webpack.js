@@ -11,7 +11,7 @@ const config = {
   mode: devMode ? 'development' : 'production',
   entry: ['@babel/polyfill', './src'],
   output: {
-    path: resolve(__dirname, 'dist'),
+    path: resolve(__dirname, 'build'),
     filename: 'bundle.js'
   },
   devtool: devMode ? 'source-map' : undefined,
@@ -49,7 +49,7 @@ const config = {
   ],
   devServer: {
     publicPath: '/',
-    contentBase: './dist',
+    contentBase: './build',
     compress: true,
     host: 'reumac.local',
     disableHostCheck: true,
