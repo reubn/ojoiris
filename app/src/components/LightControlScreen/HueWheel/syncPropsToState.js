@@ -1,7 +1,7 @@
-export default ({setRealEvent, setHue, hueProp, setEnabled, enabledProp, active}) => () => {
+export default ({setRealEvent, setLocalColour, colour, setEnabled, enabledProp, active}) => () => {
   if(active) return
   setRealEvent(false)
 
-  setHue(hueProp / 255 * 360)
+  setLocalColour(colour)
   setEnabled(enabledProp)
 }

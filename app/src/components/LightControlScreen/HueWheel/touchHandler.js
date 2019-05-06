@@ -1,6 +1,6 @@
 import calculateSizing from './calculateSizing'
 
-export default ({outerCircleRef, innerCircleRef, handleRef, setHue, setRealEvent, touchOn, enabled}) => event => {
+export default ({outerCircleRef, innerCircleRef, handleRef, localColour, setLocalColour, angleToColour, setRealEvent, touchOn, enabled, setSide}) => event => {
   if(!enabled || (event.target !== outerCircleRef.current && event.target !== handleRef.current)) return
   touchOn()
 
@@ -10,9 +10,11 @@ export default ({outerCircleRef, innerCircleRef, handleRef, setHue, setRealEvent
 
   const [eventX, eventY] = [eventAbsoluteX - centerX, eventAbsoluteY - centerY] // Translate event position from page-based, to container-based
 
-  const colourRadians = Math.atan2(eventY, eventX) + (0.5 * Math.PI) // Get angle between y-axis and touch event; rotate 1 quarter to reframe against x-axis
+  const baseRadians = Math.atan2(eventY, eventX)
+  const colourRadians = baseRadians + (0.5 * Math.PI) // Get angle between y-axis and touch event; rotate 1 quarter to reframe against x-axis
   const colourDegrees = (360 + Math.round(colourRadians / Math.PI * 180)) % 360
 
   setRealEvent(true)
-  setHue(colourDegrees)
+  setSide(eventAbsoluteX > centerX ? 1 : 2)
+  setLocalColour({...localColour, ...angleToColour(colourDegrees)})
 }

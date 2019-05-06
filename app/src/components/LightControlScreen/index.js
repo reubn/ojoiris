@@ -11,6 +11,8 @@ import ValueIcon from './ValueIcon'
 
 import ValueSlider from './ValueSlider'
 
+import colourModes from './colourModes'
+
 import {screen} from './style'
 
 export default () => {
@@ -22,6 +24,8 @@ export default () => {
 
   const [localState, setLocalState] = useState(state)
   const [lastOnValue, setLastOnValue] = useState(255)
+  const [mode, setMode] = useState(true)
+  const [meta, setMeta] = useState({})
   const [ignoreAsIsDuplicate, setIgnoreAsIsDuplicate] = useState(false)
 
   // Update on state changes
@@ -32,17 +36,24 @@ export default () => {
     setIgnoreAsIsDuplicate(true) // Prevent Loop
   }, [state])
 
+  useEffect(() => {
+    setMeta({})
+  }, [mode])
+
   // Dispatch local state changes
   useEffect(() => {
     if(!ignoreAsIsDuplicate) lightState(dispatch, localState)
   }, [localState])
 
-  const handleChange = ({hue=null, value=null, enabled=null}) => {
+  const handleChange = ({colour: {hue=null, saturation=null, value=null, meta=null}, enabled=null}) => {
     const newState = {
       ...localState
     }
 
+    if(meta !== null) setMeta(meta)
+
     if(hue !== null) newState.hue = hue
+    if(saturation !== null) newState.saturation = saturation
 
     if(value !== null) {
       setLastOnValue(value)
@@ -63,12 +74,20 @@ export default () => {
     setIgnoreAsIsDuplicate(false)
   }
 
+  const colour = {
+    hue: localState.hue,
+    saturation: localState.saturation,
+    value: localState.value,
+    meta
+  }
+
   return (
     <section className={screen}>
-      <HueWheel hue={localState.hue} value={localState.value} enabled={localState.enabled} onChange={handleChange}>
-        <ValueIcon value={localState.value} />
+      <section onClick={() => setMode(!mode)}>Change</section>
+      <HueWheel colour={colour} enabled={localState.enabled} onChange={handleChange} config={colourModes[mode ? 'colour' : 'white']}>
+        <ValueIcon colour={colour} />
       </HueWheel>
-      <ValueSlider hue={localState.hue} value={localState.value} enabled={localState.enabled} onChange={handleChange}/>
+      <ValueSlider colour={colour} enabled={localState.enabled} onChange={handleChange}/>
     </section>
   )
 }

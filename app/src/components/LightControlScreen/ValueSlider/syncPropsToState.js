@@ -1,6 +1,6 @@
-export default ({setRealEvent, setValue, valueProp, active}) => () => {
+export default ({setRealEvent, setValue, colour, active}) => () => {
   if(active) return
   setRealEvent(false)
 
-  setValue(valueProp / 255)
+  setValue(colour.value / 255)
 }

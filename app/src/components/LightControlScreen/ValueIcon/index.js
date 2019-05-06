@@ -3,7 +3,7 @@ import classnames from 'classnames'
 
 import {centre, ray} from './style'
 
-export default ({value}) => {
+export default ({colour: {value}}) => {
   const [minWidth, maxWidth] = [10.5, 46]
   const widthRange = maxWidth - minWidth
 
