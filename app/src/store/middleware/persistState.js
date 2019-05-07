@@ -1,10 +1,10 @@
-import {localStorageKeyName} from '../initials/light'
+import {write} from  '../../localStorage'
 
 export default ({getState}) => next => action => {
   next(action)
 
   if(action.type.startsWith('LIGHT_STATE')){
-      const {light: {state}} = getState()
-      localStorage.setItem(localStorageKeyName, JSON.stringify(state))
+      const {light: {state}, metadata: {id}} = getState()
+      write({id, state})
   }
 }
