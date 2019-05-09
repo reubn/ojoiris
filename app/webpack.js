@@ -50,7 +50,7 @@ const config = {
   ]
 },
   plugins: [
-    devMode ? new BundleAnalyzerPlugin() : () => 0,
+    // new BundleAnalyzerPlugin(),
     new HtmlWebpackPlugin({
       title: 'Ojoiris',
       meta: {
