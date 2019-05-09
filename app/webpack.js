@@ -1,18 +1,24 @@
-const webpack = require('webpack')
-const WebpackDevServer = require('webpack-dev-server')
-
 const http = require('http')
 const {resolve} = require('path')
 const {readFileSync} = require('fs')
-const CopyPlugin = require('copy-webpack-plugin')
 
-const devMode = process.env !== 'production'
+const webpack = require('webpack')
+const WebpackDevServer = require('webpack-dev-server')
+
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const Critters = require('critters-webpack-plugin')
+
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+const devMode = process.env.NODE_ENV !== 'production'
+
 const config = {
   mode: devMode ? 'development' : 'production',
   entry: ['@babel/polyfill', './src'],
   output: {
     path: resolve(__dirname, 'build'),
-    filename: 'bundle.js'
+    filename: '[chunkhash].js',
+    libraryTarget: 'umd'
   },
   devtool: devMode ? 'source-map' : undefined,
   module: {
@@ -43,9 +49,16 @@ const config = {
   ]
 },
   plugins: [
-    new CopyPlugin([
-      {from: './src/index.html', to: 'index.html'}
-    ]),
+    devMode ? new BundleAnalyzerPlugin() : () => 0,
+    new HtmlWebpackPlugin({
+      title: 'Ojoiris',
+      meta: {
+        viewport: 'viewport-fit=cover',
+        'apple-mobile-web-app-capable': 'yes',
+        'apple-mobile-web-app-status-bar-style': 'black-translucent'
+      }
+    }),
+    new Critters(),
   ],
   devServer: {
     publicPath: '/',
@@ -60,19 +73,17 @@ const config = {
       cert: readFileSync('/Users/reuben/reumac.local+4.pem'),
       ca: readFileSync('/Users/reuben/Library/Application Support/mkcert/reubenRootCA.pem'),
     })
-    // historyApiFallback: {
-    //   rewrites: [{
-    //     from: /^.*\/(.+)\/?$/,
-    //     to: context => `/${context.match[0]}.html`
-    //   }]
-    // }
   },
   resolve: {
     extensions: ['.wasm', '.mjs', '.js', '.css', '.json']
   }
 }
 
-const wds = new WebpackDevServer(webpack(config), config.devServer)
+if(devMode) {
+  const wds = new WebpackDevServer(webpack(config), config.devServer)
 
-wds.listen(443)
-http.createServer(wds.app).listen(80)
+  wds.listen(443)
+  http.createServer(wds.app).listen(80)
+} else {
+  webpack(config).run(() => null)
+}
