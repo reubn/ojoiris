@@ -7,6 +7,7 @@ const WebpackDevServer = require('webpack-dev-server')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const Critters = require('critters-webpack-plugin')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
@@ -56,6 +57,18 @@ const config = {
         viewport: 'viewport-fit=cover',
         'apple-mobile-web-app-capable': 'yes',
         'apple-mobile-web-app-status-bar-style': 'black-translucent'
+      }
+    }),
+    new FaviconsWebpackPlugin({
+      logo: './src/components/App/logo.png',
+      persistentCache: true,
+      inject: true,
+      background: '#090a10',
+      title: 'Ojoiris',
+      icons: {
+        appleIcon: true,
+        appleStartup: true,
+        favicons: true
       }
     }),
     new Critters(),
