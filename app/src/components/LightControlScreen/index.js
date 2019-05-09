@@ -45,7 +45,8 @@ export default () => {
 
   const handleChange = ({colour: {hue=null, saturation=null, value=null}, enabled=null}) => {
     const newState = {
-      ...localState
+      ...localState,
+      show: 2
     }
 
     if(hue !== null) newState.hue = hue

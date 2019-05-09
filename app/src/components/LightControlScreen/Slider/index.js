@@ -36,7 +36,11 @@ export default ({colour, enabled=false, onChange, setBeingTouched, property, sty
   return (
     <section
      ref={containerRef}
-     style={{...style, '--colour': colourToCSS({...colour, [property]: 255})}}
+     style={{
+       ...style,
+       '--colour': colourToCSS({...colour, [property]: 255}),
+       '--handle-colour': colourToCSS(colour)
+     }}
      className={classnames(container, {[activeStyle]: active, [disabled]: !enabled})}
      onTouchStart={handleTouch}
      onTouchMove={handleTouch}

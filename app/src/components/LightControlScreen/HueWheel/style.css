@@ -93,6 +93,8 @@
   align-items: center;
   width: 2%;
   height: 6%;
+  min-width: 16px;
+  min-height: 16px;
   background: var(--background);
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.5) 0 0 0.5rem 0;
@@ -104,6 +106,7 @@
 
   .disabled & {
     height: 0;
+    width: 0;
     transition: height 0.25s ease, left 0s ease 0.25s, bottom 0s ease 0.25s;
   }
 
@@ -111,9 +114,16 @@
     content: "";
     display: block;
     height: 75%;
-    width: 3px;
-    background: #fff;
-    opacity: 0.1;
+    width: 2px;
+    background: var(--handle-colour);
+    border-radius: 2px;
+    transition: width 0.25s cubic-bezier(0.335, 0.880, 0.450, 0.940), height 0.25s cubic-bezier(0.335, 0.880, 0.450, 0.940);
+
+    .active & {
+      width: 4px;
+      height: 85%;
+    }
+
     .disabled & {
       opacity: 0;
     }

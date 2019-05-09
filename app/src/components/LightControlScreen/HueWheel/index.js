@@ -48,7 +48,10 @@ export default ({colour, enabled: enabledProp, onChange, config: {backgroundCSS,
        onTouchStart={handleTouch}
        onTouchMove={handleTouch}
        onTouchEnd={touchOff}
-       style={{'--colour': colourToCSS(localColour)}}
+       style={{
+         '--colour': colourToCSS(localColour),
+         '--handle-colour': colourToCSS({...localColour, saturation: 255, value: 255})
+       }}
       >
         <section ref={outerCircleRef} className={outerCircle} style={{background: backgroundCSS}}></section>
         <section ref={handleRef} className={handle} style={handlePosition}></section>
