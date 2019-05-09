@@ -48,13 +48,14 @@ export default ({colour, enabled: enabledProp, onChange, config: {backgroundCSS,
        onTouchStart={handleTouch}
        onTouchMove={handleTouch}
        onTouchEnd={touchOff}
+       style={{'--colour': colourToCSS(localColour)}}
       >
         <section ref={outerCircleRef} className={outerCircle} style={{background: backgroundCSS}}></section>
         <section ref={handleRef} className={handle} style={handlePosition}></section>
 
         <section ref={innerCircleRef} className={innerMaskingCircle}></section>
 
-        <section className={innerIndicatorCircle} style={{background: colourToCSS(localColour)}}></section>
+        <section className={innerIndicatorCircle}></section>
         <section className={indicatorMaskingCircle} onTouchEnd={handlePress}>
           {children}
         </section>

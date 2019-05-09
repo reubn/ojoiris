@@ -13,7 +13,7 @@ import syncStateToHandle from './syncStateToHandle'
 import {container, handle, active as activeStyle, disabled} from './style'
 
 
-export default ({colour, enabled=false, onChange, property, style}) => {
+export default ({colour, enabled=false, onChange, setBeingTouched, property, style}) => {
   const containerRef = useRef(), handleRef = useRef()
 
   const [value, setValue] = useState(colour.value / 255)

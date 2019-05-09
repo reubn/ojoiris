@@ -1,21 +1,22 @@
 .container{
   display: flex;
-    width: 80vw;
-    height: 8.75vw;
-    padding: 0;
-    margin-top: 5rem;
-    user-select: none;
-    box-shadow: rgba(0, 0, 0, 0.05) 0 0 0.5rem 0;
-    border-radius: 1.25rem;
-    align-items: center;
+  --height: 11.25vw;
+  width: 90vw;
+  height: var(--height);
+  user-select: none;
+  box-shadow: rgba(0, 0, 0, 0.05) 0 0 0.5rem 0;
+  border-radius: 1.25rem;
+  align-items: center;
 }
 
 .handle{
   border-radius: 8px;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 1.75%;
   height: 50%;
-  background: #fff;
+  background: var(--background);
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.04) 0 0 0.5rem 0;
   transition: height 0.2s cubic-bezier(0.335, 0.880, 0.450, 0.940);
@@ -29,5 +30,18 @@
   .disabled & {
     height: 16%;
     transition: height 0.2s cubic-bezier(0.335, 0.880, 0.450, 0.940), left 0.2s cubic-bezier(0.335, 0.880, 0.450, 0.940) 0.1s;
+  }
+
+  &:after {
+    content: "";
+    display: block;
+    height: 75%;
+    width: 3px;
+    background: #fff;
+    opacity: 0.1;
+
+    .disabled & {
+      opacity: 0;
+    }
   }
 }

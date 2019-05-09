@@ -1,7 +1,9 @@
 .container{
-  position: relative;
-  width: 70vw;
-  height: 70vw;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 90vw;
+  height: 90vw;
   padding:0;
   margin: 0;
   user-select: none;
@@ -31,11 +33,14 @@
   transform: translate(-50%, -50%);
   width: 75%;
   height: 75%;
-  background: #fff;
+  background: var(--background);
   border-radius: 50%;
-  box-shadow: rgba(0, 0, 0, 0.05) 0 0 1rem 0.25rem;
-}
+  box-shadow: var(--background) 0 0 1.5rem 0rem;
 
+  .disabled & {
+    box-shadow: var(--background) 0 0 0 0;
+  }
+}
 
 .innerIndicatorCircle {
   position: absolute;
@@ -45,11 +50,13 @@
   width: 45%;
   height: 45%;
   border-radius: 50%;
-  transition: all 0.25s ease;
+  transition: width 0.25s ease, height 0.25s ease;
+  background: var(--colour);
 
   .disabled & {
     width: 40%;
     height: 40%;
+    transition: width 0.25s ease, height 0.25s ease;
   }
 }
 
@@ -60,18 +67,19 @@
   transform: translate(-50%, -50%);
   width: 43%;
   height: 43%;
-  background: #fff;
+  background: var(--background);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 7rem;
   font-weight: 100;
-  color: #efefef;
+  color: hsl(235, 5%, 12.5%);
 
   &:active {
-    color:#ccc;
+    color: hsl(235, 7%, 16%);
   }
+
 }
 
 
@@ -80,12 +88,14 @@
   transform: translate(-50%, 50%) rotate(var(--angle));
   transform-origin: center;
   border-radius: 8px;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 2%;
   height: 6%;
-  background: #fff;
+  background: var(--background);
   cursor: pointer;
-  box-shadow: rgba(0, 0, 0, 0.04) 0 0 0.5rem 0;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 0 0.5rem 0;
   transition: height 0.2s cubic-bezier(0.335, 0.880, 0.450, 0.940);
 
   &:active, .active & {
@@ -95,5 +105,17 @@
   .disabled & {
     height: 0;
     transition: height 0.25s ease, left 0s ease 0.25s, bottom 0s ease 0.25s;
+  }
+
+  &:after {
+    content: "";
+    display: block;
+    height: 75%;
+    width: 3px;
+    background: #fff;
+    opacity: 0.1;
+    .disabled & {
+      opacity: 0;
+    }
   }
 }

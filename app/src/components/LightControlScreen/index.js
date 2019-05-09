@@ -14,7 +14,7 @@ import Slider from './Slider'
 
 import colourModes from './colourModes'
 
-import {screen} from './style'
+import {screen, sliderGroup} from './style'
 
 export default () => {
   const dispatch = useDispatch()
@@ -82,8 +82,10 @@ export default () => {
       <HueWheel colour={colour} enabled={localState.enabled} onChange={handleChange} config={colourModes[mode ? 'colour' : 'white']}>
         <ValueIcon colour={colour} />
       </HueWheel>
-      <Slider property="value" colour={colour} enabled={localState.enabled} onChange={handleChange} style={{background: 'linear-gradient(to right, black, var(--colour))'}}/>
-      <Slider property="saturation" colour={colour} enabled={localState.enabled} onChange={handleChange} style={{background: 'linear-gradient(to right, white, var(--colour))'}}/>
+      <span className={sliderGroup}>
+        <Slider property="value" colour={colour} enabled={localState.enabled} onChange={handleChange} style={{background: 'linear-gradient(to right, black, var(--colour))'}}/>
+        <Slider property="saturation" colour={colour} enabled={localState.enabled} onChange={handleChange} style={{background: 'linear-gradient(to right, white, var(--colour))'}}/>
+      </span>
     </section>
   )
 }

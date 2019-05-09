@@ -2,7 +2,23 @@
   width: 100%;
   height: 100%;
   display:flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   flex-direction: column;
+  padding-bottom: 5rem;
+}
+
+.sliderGroup > *:first-child{
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.sliderGroup > *:last-child{
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.sliderGroup > *:not(:first-child):not(:last-child){
+  border-radius: 0;
+}
+.sliderGroup > *:nth-child(2n - 1){
+  border-bottom: 8px solid var(--background);
 }

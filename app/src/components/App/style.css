@@ -1,4 +1,6 @@
 .app {
+
+
   position: absolute;
   width: 100vw;
   height: 100vh;
@@ -10,7 +12,15 @@
   justify-content: center;
   flex-direction: column;
   font-family: 'SF Pro Display', -apple-system, 'BlinkMacSystemFont', 'SF Pro Text';
+
+  background: var(--background);
+
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
+}
+
+body {
+  --background: hsl(235, 28%, 5%);
+  background: var(--background);
 }
