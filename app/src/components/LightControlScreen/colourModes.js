@@ -8,7 +8,7 @@ import rgb2hsl from 'pure-color/convert/rgb2hsl'
 export default {
   colour: {
     backgroundCSS: 'conic-gradient(#f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00)',
-    colourToAngle: ({hue}) => hue / 255 * 360,
+    colourToAngle: ({hue}, {angle}) => (angle || angle === 0) ? angle : (hue / 255 * 360),
     angleToColour: angle => ({hue: angle / 360 * 255})
   },
   white: {
