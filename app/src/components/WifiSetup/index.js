@@ -1,4 +1,4 @@
-import React, {useEffect, useCallback} from 'react'
+import React, {useEffect, useCallback, useRef} from 'react'
 import {useDispatch, useMappedState} from 'redux-react-hook'
 
 import {searching as searchingSymbol} from '../../store/reducers/light'
@@ -10,6 +10,7 @@ import settingsIcon from './settingsIcon.png'
 import {title, explination, description, prompt, step, icon, instruction, bold, noBreak, code, cameraIcon, qrIcon, settingsIcon as settingsIconStyle} from './style'
 
 export default () => {
+  const macRef = useRef()
   const dispatch = useDispatch()
   const mapState = useCallback(state => ({
     searching: state.light.status === searchingSymbol,
@@ -45,6 +46,15 @@ export default () => {
     }
   }, [])
 
+  useEffect(() => {
+    const {current: macElement} = macRef
+
+    const handler = event => event.stopPropagation()
+
+    macElement.addEventListener('touchstart', handler)
+    return () => macElement.removeEventListener('touchstart', handler)
+  }, [])
+
   return (
     <><section className={explination}>
     <h1 className={title}>WiFi</h1>
@@ -54,7 +64,7 @@ export default () => {
       <section className={step}>
         <section className={instruction}>
           <p>Firstly, plug in your light using a <span className={noBreak}><span className={bold}>Micro USB</span> cable.</span> It should light up!</p>
-          <p>If your WiFi network requires you to whitelist MAC addresses, use <code className={code}>{formattedMACAddress}</code></p>
+          <p>If your WiFi network requires you to whitelist MAC addresses, use <code ref={macRef} className={code}>{formattedMACAddress}</code></p>
         </section>
       </section>
       <section className={step}>
