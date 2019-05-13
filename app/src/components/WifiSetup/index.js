@@ -24,15 +24,25 @@ export default () => {
   const statusMessage =
     searching
     ? 'Looking for your light'
-    : searchCount >= 3
+    : searchCount >= 4
       ? `Hmmm, can't seem to find your light. Is it connected?`
       : `It's time to turn your light on!`
 
   useEffect(() => {
-    const handler = () => !document.hidden && dispatch({type: 'LIGHT_ONLINE_CHECK'})
+    const timeout = 5000
+    const handler = () => {
+      clearTimeout(scanTimer)
+      scanTimer = setTimeout(handler, timeout)
+      if(!document.hidden) dispatch({type: 'LIGHT_ONLINE_CHECK'})
+    }
 
+    let scanTimer = setTimeout(handler, timeout)
     document.addEventListener('visibilitychange', handler)
-    return () => document.removeEventListener('visibilitychange', handler)
+
+    return () => {
+      clearTimeout(scanTimer)
+      document.removeEventListener('visibilitychange', handler)
+    }
   }, [])
 
   return (
