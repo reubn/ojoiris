@@ -4,6 +4,7 @@ export default text => text.trim().split('\n').reduce((object, line) => {
     let normalisedValue = value
 
     if(key === 'enabled') normalisedValue = value === '1'
+    else if(key === 'timestamp') normalisedValue = {offset: value - Date.now()}
     else try {normalisedValue = parseInt(value)} catch(_){}
 
     return {
@@ -11,14 +12,3 @@ export default text => text.trim().split('\n').reduce((object, line) => {
       [key]: normalisedValue
     }
   }, {})
-
-
-// show 2
-// value 255
-// topHold 2750
-// bottomHold 1750
-// transitionLength 3250
-// dimmingLength 1000
-// colourOffsetIncrement 0.00
-// fps 16.00
-// enabled 1

@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <functional>
 
+#include <Arduino.h>
 #include <WiFiManager.h> // https://github.com/tzapu/WiFiManager
 #include <ESP8266mDNS.h>
 #include <ESP8266WebServer.h>
@@ -108,6 +109,11 @@ void initialiseWifi(ConfigurableSettings& settings, std::function<void()>& saveC
         server.send(403, "text/plain", "HMAC Invalid");
         return;
       }
+
+      if(!server.hasArg("timestamp") || abs(atoi(server.arg("timestamp").c_str()) - int(millis())) > (2 * 1000)) {
+        server.send(403, "text/plain", "Timestamp Invalid");
+        return;
+      }
     }
 
     bool changed = false;
@@ -157,6 +163,7 @@ void initialiseWifi(ConfigurableSettings& settings, std::function<void()>& saveC
 
     String response =
       // "HMAC " + String((char*)HMAC) + "\n" +
+      "timestamp " + String(millis()) + "\n" +
       "value " + String(settings.value) + "\n" +
       "saturation " + String(settings.saturation) + "\n" +
       "hue " + String(settings.hue) + "\n" +
