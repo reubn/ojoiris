@@ -1,5 +1,6 @@
 #include <string>
 #include <algorithm>
+#include <functional>
 
 #include <WiFiManager.h> // https://github.com/tzapu/WiFiManager
 #include <ESP8266mDNS.h>
@@ -58,7 +59,7 @@ void CORSHeaders(){
   server.sendHeader("Access-Control-Allow-Headers", "Origin, Content-Type, Accept");
 }
 
-void initialiseWifi(ConfigurableSettings& settings){
+void initialiseWifi(ConfigurableSettings& settings, std::function<void()>& saveConfig){
   wm.setConfigPortalBlocking(false);
   if(wm.autoConnect(WIFI_SSID, WIFI_PASS)) Serial.println("WiFi Connection Established");
 
@@ -109,40 +110,50 @@ void initialiseWifi(ConfigurableSettings& settings){
       }
     }
 
+    bool changed = false;
+
     if(server.hasArg("show")){
       int arg = atoi(server.arg("show").c_str());
       if (shows.find(arg) != shows.end()) settings.showId = arg;
+      changed = true;
     }
 
     if(server.hasArg("brightness")){
       std::string arg = server.arg("brightness").c_str();
       settings.globalBrightness = atoi(arg.c_str());
+      changed = true;
     }
 
     if(server.hasArg("hue")){
       std::string arg = server.arg("hue").c_str();
       settings.hue = atoi(arg.c_str());
+      changed = true;
     }
 
     if(server.hasArg("saturation")){
       std::string arg = server.arg("saturation").c_str();
       settings.saturation = atoi(arg.c_str());
+      changed = true;
     }
 
     if(server.hasArg("value")){
       std::string arg = server.arg("value").c_str();
       settings.value = atoi(arg.c_str());
+      changed = true;
     }
 
     if(server.hasArg("enabled")){
       std::string enabledArg = server.arg("enabled").c_str();
       settings.enabled = enabledArg.compare("true") == 0;
+      changed = true;
     }
 
     if(server.hasArg("resetWifi")){
       wm.resetSettings();
       Serial.println("Wifi Settings Reset");
     }
+
+    if(changed) saveConfig();
 
     String response =
       // "HMAC " + String((char*)HMAC) + "\n" +
