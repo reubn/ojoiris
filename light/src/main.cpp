@@ -9,7 +9,6 @@
 #include <FastLED.h>
 
 #include "main.hpp"
-#include "secrets.hpp"
 
 #include "./ringLEDs/main.hpp"
 #include "./wifi/main.hpp"

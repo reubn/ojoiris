@@ -114,36 +114,6 @@ void initialiseWifi(ConfigurableSettings& settings){
       if (shows.find(arg) != shows.end()) settings.showId = arg;
     }
 
-    if(server.hasArg("topHold")){
-      std::string arg = server.arg("topHold").c_str();
-      settings.topHold = atoi(arg.c_str());
-    }
-
-    if(server.hasArg("bottomHold")){
-      std::string arg = server.arg("bottomHold").c_str();
-      settings.bottomHold = atoi(arg.c_str());
-    }
-
-    if(server.hasArg("transitionLength")){
-      std::string arg = server.arg("transitionLength").c_str();
-      settings.transitionLength = atoi(arg.c_str());
-    }
-
-    if(server.hasArg("dimmingLength")){
-      std::string arg = server.arg("dimmingLength").c_str();
-      settings.dimmingLength = atoi(arg.c_str());
-    }
-
-    if(server.hasArg("colourOffsetIncrement")){
-      std::string arg = server.arg("colourOffsetIncrement").c_str();
-      settings.colourOffsetIncrement = atof(arg.c_str());
-    }
-
-    if(server.hasArg("fps")){
-      std::string arg = server.arg("fps").c_str();
-      settings.fps = atof(arg.c_str());
-    }
-
     if(server.hasArg("brightness")){
       std::string arg = server.arg("brightness").c_str();
       settings.globalBrightness = atoi(arg.c_str());
@@ -181,12 +151,6 @@ void initialiseWifi(ConfigurableSettings& settings){
       "hue " + String(settings.hue) + "\n" +
       "show " + String(settings.showId) + "\n" +
       "brightness " + String(settings.globalBrightness) + "\n" +
-      "topHold " + String(settings.topHold) + "\n" +
-      "bottomHold " + String(settings.bottomHold) + "\n" +
-      "transitionLength " + String(settings.transitionLength) + "\n" +
-      "dimmingLength " + String(settings.dimmingLength) + "\n" +
-      "colourOffsetIncrement " + String(settings.colourOffsetIncrement) + "\n" +
-      "fps " + String(settings.fps) + "\n" +
       "enabled " + String(settings.enabled) + "\n";
 
 

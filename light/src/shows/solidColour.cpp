@@ -9,10 +9,11 @@
 #include "solidColour.hpp"
 
 void loopSolidColour(ConfigurableSettings& settings) {
+  static float msBetweenFrames = 1000 / 60; // 60FPS
+
   static unsigned long lastExecution = millis();
 
-
-  if(millis() >= lastExecution + settings.fps){
+  if(millis() >= lastExecution + msBetweenFrames){
     if(settings.enabled){
       LEDS.setBrightness(settings.value);
       for(auto& ringLED : allLEDs) rawLEDs[ringLED.index] = CHSV(settings.hue, settings.saturation, 255);

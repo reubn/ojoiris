@@ -7,9 +7,23 @@
 #include "rainbowBreathe.hpp"
 
 void loopRainbowBreathe(ConfigurableSettings& settings){
+    static float msBetweenFrames = 1000 / 60; // 60FPS
+    static int maxBrightness = 255;
+    static int minBrightness = 0;
+
+    static float maxHue = 255;
+    static float maxOffset = 255 / maxHue;
+
+    static int topHold = 2750;
+    static int bottomHold = 1750;
+    static int transitionLength = 3250;
+    static int dimmingLength = 1000;
+    static float colourOffsetIncrement = 0.004;
+
+
   	static unsigned long lastExecutionColour = 0;
   	static unsigned long lastExecutionBrightness = 0;
-  	static float brightness = settings.minBrightness;
+  	static float brightness = minBrightness;
     static float colourOffset = 0;
   	static int mode = +1;
   	static int hold = 0;
@@ -17,36 +31,36 @@ void loopRainbowBreathe(ConfigurableSettings& settings){
 
     if(settings.enabled) {
       LEDS.setBrightness(settings.globalBrightness);
-      int adjustedBrightness = dim8_lin(min(settings.maxBrightness, max(settings.minBrightness, int(round(brightness)))));
+      int adjustedBrightness = dim8_lin(min(maxBrightness, max(minBrightness, int(round(brightness)))));
 
-      if(millis() >= lastExecutionBrightness + (hold ? hold : settings.fps)){
+      if(millis() >= lastExecutionBrightness + (hold ? hold : msBetweenFrames)){
         hold = 0;
 
-        for(auto& ringLED : innerLEDs) rawLEDs[ringLED.index] = CHSV(0, 0, settings.maxBrightness - adjustedBrightness);
+        for(auto& ringLED : innerLEDs) rawLEDs[ringLED.index] = CHSV(0, 0, maxBrightness - adjustedBrightness);
 
-        if(brightness >= settings.maxBrightness) {hold = settings.topHold; mode = -1;}
-        if(brightness <= settings.minBrightness) {hold = settings.bottomHold; mode = +1;}
+        if(brightness >= maxBrightness) {hold = topHold; mode = -1;}
+        if(brightness <= minBrightness) {hold = bottomHold; mode = +1;}
 
-        float brightnessIncrement = (settings.maxBrightness - settings.minBrightness) / (settings.transitionLength / settings.fps);
+        float brightnessIncrement = (maxBrightness - minBrightness) / (transitionLength / msBetweenFrames);
         brightness += (brightnessIncrement * mode);
 
       	FastLED.show();
         lastExecutionBrightness = millis();
       }
 
-      if(millis() >= lastExecutionColour + settings.fps){
+      if(millis() >= lastExecutionColour + msBetweenFrames){
         for(auto& ringLED : outerLEDs) {
-      		float hue = fmod(ringLED.angle + colourOffset, settings.maxOffset) * settings.maxHue;
+      		float hue = fmod(ringLED.angle + colourOffset, maxOffset) * maxHue;
       		rawLEDs[ringLED.index] = CHSV(hue, 255, adjustedBrightness);
       	}
 
-      	colourOffset = fmod(colourOffset + settings.colourOffsetIncrement, settings.maxOffset);
+      	colourOffset = fmod(colourOffset + colourOffsetIncrement, maxOffset);
 
       	FastLED.show();
         lastExecutionColour = millis();
       }
       blanked = false;
-    } else if(!blanked && millis() >= lastExecutionBrightness + settings.fps){
+    } else if(!blanked && millis() >= lastExecutionBrightness + msBetweenFrames){
       hold = 0;
 
       int clampedBrightness = min(settings.globalBrightness, max(0, int(round(brightness))));
@@ -54,7 +68,7 @@ void loopRainbowBreathe(ConfigurableSettings& settings){
 
       if(clampedBrightness <= 0) blanked = true;
 
-      float dimmingIncrement = settings.maxBrightness / (settings.dimmingLength / settings.fps);
+      float dimmingIncrement = maxBrightness / (dimmingLength / msBetweenFrames);
       brightness -= dimmingIncrement;
 
     	FastLED.show();
