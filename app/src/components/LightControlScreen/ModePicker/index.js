@@ -24,7 +24,7 @@ export default ({mode, onChange, modes}) => {
   return (
     <section ref={selfRef} className={modePicker}>
       <>
-        <span onTouchEnd={() => setOpen(!open)}><SelectedIcon className={icon} /></span>
+        <span onTouchEnd={() => setOpen(!open)}><SelectedIcon className={classnames(icon, {[openStyle]: open})} /></span>
         <section className={classnames(modeDropdown, {[openStyle]: open})} style={{'--open-height': `calc(var(--optionHeight) * ${dropdownModes.length})`}}>
         {dropdownModes.map((mode, index) => {
           const Icon = modes[mode].Icon
