@@ -3,8 +3,14 @@ import store from '../store'
 import calculateHMAC from './calculateHMAC'
 import parseResponse from './parseResponse'
 
-export default async ({timestamp: {offset}={}, ...parameters}, {key, id}) => {
-  console.log(parameters, offset)
+const timestampCheck = async (response, {parameters, key, id}, retry) => {
+  if(!retry) return
+  const text = await response.text()
+
+  if(text.startsWith('Timestamp')) return makeRequest({timestamp: {offset: text.split(' ').pop() - Date.now()}, ...parameters}, {key, id}, false)
+}
+
+const makeRequest = async ({timestamp: {offset}={}, ...parameters}, {key, id}, retry=true) => {
   const url = new URL(`http://ojoiris-${id}.local/`)
 
   const query = new URLSearchParams(parameters)
@@ -20,5 +26,10 @@ export default async ({timestamp: {offset}={}, ...parameters}, {key, id}) => {
     url.search = query
   }
 
-  return fetch(url)
+  const response = await fetch(url)
+  if(response.ok) return response
+
+  return await timestampCheck(response, {parameters, key, id}, retry) || {ok: false}
 }
+
+export default makeRequest

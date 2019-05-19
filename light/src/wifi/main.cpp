@@ -111,7 +111,7 @@ void initialiseWifi(ConfigurableSettings& settings, std::function<void()>& saveC
       }
 
       if(!server.hasArg("timestamp") || abs(atoi(server.arg("timestamp").c_str()) - int(millis())) > (2 * 1000)) {
-        server.send(403, "text/plain", "Timestamp Invalid");
+        server.send(403, "text/plain", "Timestamp Invalid " + String(millis()));
         return;
       }
     }
