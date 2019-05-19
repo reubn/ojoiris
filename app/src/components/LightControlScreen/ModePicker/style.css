@@ -1,73 +1,73 @@
-.modePicker{
+.modePicker {
   --width: 50vw;
   --left: 50vw;
   --optionHeight: 7rem;
-position: absolute;
-top: 5rem;
-left: calc(var(--left) - (var(--width) / 2));
-color: #fff;
-font-size: 2.5rem;
-text-align: center;
-height: var(--optionHeight);
+  position: absolute;
+  top: 5rem;
+  left: calc(var(--left) - (var(--width) / 2));
+  color: #fff;
+  font-size: 2.5rem;
+  text-align: center;
+  height: var(--optionHeight);
+  z-index: 1;
 }
 
 .modeDropdown {
   background: #fff;
-width: 50vw;
-border-radius: 10px;
-position: relative;
-z-index: 0;
-top: 2.5rem;
-padding: 0;
-height: 0;
-transition: all 0.075s ease;
-
-&:before{
-  --size: 4vw;
-  content: "";
-  display: block;
-  position: absolute;
-  background: white;
-  width: 0;
+  width: 50vw;
+  border-radius: 10px;
+  position: relative;
+  z-index: 0;
+  top: 2.5rem;
+  padding: 0;
   height: 0;
-  top: 0;
-  left: calc(var(--width) / 2);
-  transform: rotate(45deg);
-  border-radius: 0.25rem;
-  z-index: -1;
   transition: all 0.075s ease;
-}
+
+  &:before {
+    --size: 4vw;
+    content: "";
+    display: block;
+    position: absolute;
+    background: white;
+    width: 0;
+    height: 0;
+    top: 0;
+    left: calc(var(--width) / 2);
+    transform: rotate(45deg);
+    border-radius: 0.25rem;
+    z-index: -1;
+    transition: all 0.075s ease;
+  }
 
   &.open {
     height: var(--open-height);
-  &:before {
-    top: calc(-0.4 * var(--size));
-    height: var(--size);
-    width: var(--size);
-    left: calc((var(--width) / 2) - (4vw / 2));
-  }
-  }
-}
 
-.modeOption{
-
-    color: #848484;
-    height: var(--optionHeight);
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    visibility:hidden;
-    transition: all 0.15s ease 0s;
-    .open & {
-      opacity: 1;
-      visibility: visible;
-      transition-delay: var(--delay);
+    &:before {
+      top: calc(-0.4 * var(--size));
+      height: var(--size);
+      width: var(--size);
+      left: calc((var(--width) / 2) - (4vw / 2));
     }
-
+  }
 }
 
+.modeOption {
+  color: #848484;
+  height: var(--optionHeight);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.15s ease 0s;
+
+  .open & {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: var(--delay);
+  }
+}
 
 .icon {
   height: calc(var(--optionHeight) / 1.5);

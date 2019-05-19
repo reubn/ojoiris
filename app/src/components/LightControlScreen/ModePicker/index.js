@@ -3,26 +3,29 @@ import classnames from 'classnames'
 
 import {modePicker, modeDropdown, modeOption, open as openStyle, icon} from './style'
 
-export default ({mode, setMode, modes}) => {
+export default ({mode, onChange, modes}) => {
   const [open, setOpen] = useState(false)
+
     useEffect(() => {
       const close = () => setOpen(false)
       if(open)  document.body.addEventListener('touchstart', close)
-      
+
       return () => !open && document.body.removeEventListener('touchstart', close)
     }, [open])
 
+  const dropdownModes = Object.keys(modes).filter(m => m !== mode)
+
   const onTouch = mode => () => {
     setOpen(false)
-    setMode(mode)
+    onChange({mode})
   }
   const SelectedIcon = modes[mode].Icon
   return (
     <section className={modePicker}>
       <>
         <span onTouchEnd={() => setOpen(!open)}><SelectedIcon className={icon} /></span>
-        <section className={classnames(modeDropdown, {[openStyle]: open})} style={{'--open-height': `calc(var(--optionHeight) * ${Object.keys(modes).length})`}}>
-        {Object.keys(modes).map((mode, index) => {
+        <section className={classnames(modeDropdown, {[openStyle]: open})} style={{'--open-height': `calc(var(--optionHeight) * ${dropdownModes.length})`}}>
+        {dropdownModes.map((mode, index) => {
           const Icon = modes[mode].Icon
 
           return (

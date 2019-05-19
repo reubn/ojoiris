@@ -25,12 +25,13 @@ export default () => {
 
   const [localState, setLocalState] = useState(state)
   const [lastOnValue, setLastOnValue] = useState(255)
-  const [mode, setMode] = useState(Object.keys(colourModes)[0])
+  const [mode, setMode] = useState('colour')
   const [ignoreAsIsDuplicate, setIgnoreAsIsDuplicate] = useState(true)
 
   // Update on state changes
   useEffect(() => {
     if(state.value) setLastOnValue(state.value)
+    if(state.show !== colourModes[mode].show) setMode(Object.entries(colourModes).find(([key, {show}]) => state.show === show)[0])
 
     setLocalState(state)
     setIgnoreAsIsDuplicate(true) // Prevent Loop
@@ -43,14 +44,15 @@ export default () => {
 
   useEffect(pageVisibilityUpdateState(dispatch), [])
 
-  const handleChange = ({colour: {hue=null, saturation=null, value=null}, enabled=null}) => {
-    const newState = {
-      ...localState,
-      show: 2
-    }
+  const handleChange = ({colour: {hue=null, saturation=null, value=null}={}, enabled=null, mode=null}) => {
+    const newState = {...localState}
 
     if(hue !== null) newState.hue = hue
     if(saturation !== null) newState.saturation = saturation
+    if(mode !== null && colourModes[mode]){
+      setMode(mode)
+      newState.show = colourModes[mode].show
+    }
 
     if(value !== null) {
       setLastOnValue(value)
@@ -77,16 +79,17 @@ export default () => {
     value: localState.value
   }
 
+  const currentMode = colourModes[mode]
+
   return (
     <section className={screen}>
-      {/*<section onClick={() => setMode(Object.keys(colourModes)[(Object.keys(colourModes).indexOf(mode) + 1) % (Object.keys(colourModes).length)])}>Change</section>*/}
-      <ModePicker mode={mode} setMode={setMode} modes={colourModes}/>
-      <HueWheel colour={colour} enabled={localState.enabled} disabledInteraction={!['colour', 'white'].includes(mode)} onChange={handleChange} config={colourModes[mode]}>
+      <ModePicker mode={mode} modes={colourModes} onChange={handleChange}/>
+      <HueWheel colour={colour} enabled={localState.enabled} disabledInteraction={!currentMode.showControls} onChange={handleChange} config={currentMode}>
         <ValueIcon colour={colour} />
       </HueWheel>
       <span className={sliderGroup}>
-        <Slider property="value" colour={colour} enabled={localState.enabled} disabledInteraction={!['colour', 'white'].includes(mode)} onChange={handleChange} style={{background: 'linear-gradient(to right, black, var(--colour))'}}/>
-        <Slider property="saturation" colour={colour} enabled={localState.enabled} disabledInteraction={!['colour', 'white'].includes(mode)} onChange={handleChange} style={{background: 'linear-gradient(to right, white, var(--colour))'}}/>
+        <Slider property="value" colour={colour} enabled={localState.enabled} disabledInteraction={!currentMode.showControls} onChange={handleChange} style={{background: 'linear-gradient(to right, black, var(--colour))'}}/>
+        <Slider property="saturation" colour={colour} enabled={localState.enabled} disabledInteraction={!currentMode.showControls} onChange={handleChange} style={{background: 'linear-gradient(to right, white, var(--colour))'}}/>
       </span>
     </section>
   )
