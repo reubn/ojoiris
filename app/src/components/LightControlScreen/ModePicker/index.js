@@ -5,9 +5,10 @@ import {modePicker, modeDropdown, modeOption, open as openStyle, icon} from './s
 
 export default ({mode, onChange, modes}) => {
   const [open, setOpen] = useState(false)
+  const selfRef = useRef()
 
     useEffect(() => {
-      const close = () => setOpen(false)
+      const close = event => !selfRef.current.contains(event.target) && setOpen(false)
       if(open)  document.body.addEventListener('touchstart', close)
 
       return () => !open && document.body.removeEventListener('touchstart', close)
@@ -21,7 +22,7 @@ export default ({mode, onChange, modes}) => {
   }
   const SelectedIcon = modes[mode].Icon
   return (
-    <section className={modePicker}>
+    <section ref={selfRef} className={modePicker}>
       <>
         <span onTouchEnd={() => setOpen(!open)}><SelectedIcon className={icon} /></span>
         <section className={classnames(modeDropdown, {[openStyle]: open})} style={{'--open-height': `calc(var(--optionHeight) * ${dropdownModes.length})`}}>
