@@ -1,7 +1,7 @@
 import calculateSizing from './calculateSizing'
 
-export default ({containerRef, handleRef, setValue, setRealEvent, touchOn, enabled}) => event => {
-  if(event.target !== containerRef.current && event.target !== handleRef.current) return
+export default ({containerRef, handleRef, setValue, setRealEvent, touchOn, enabled, disabledInteraction}) => event => {
+  if(disabledInteraction || (event.target !== containerRef.current && event.target !== handleRef.current)) return
   touchOn()
 
   const {width, x} = calculateSizing({containerRef})

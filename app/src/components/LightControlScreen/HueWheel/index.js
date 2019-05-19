@@ -12,9 +12,9 @@ import syncStateToOnChange from './syncStateToOnChange'
 import syncStateToHandle from './syncStateToHandle'
 
 
-import {outerCircle, container, innerMaskingCircle, innerIndicatorCircle, indicatorMaskingCircle, handle, active as activeStyle, disabled} from './style'
+import {outerCircle, container, innerMaskingCircle, innerIndicatorCircle, indicatorMaskingCircle, handle, active as activeStyle, disabled, interactionDisabled} from './style'
 
-export default ({colour, enabled: enabledProp, onChange, config: {backgroundCSS, colourToAngle, angleToColour}, children}) => {
+export default ({colour, disabledInteraction, enabled: enabledProp, onChange, config: {backgroundCSS, colourToAngle, angleToColour}, children}) => {
   const containerRef = useRef(), outerCircleRef = useRef(), innerCircleRef = useRef(), handleRef = useRef()
 
   const [localColour, setLocalColour] = useState(colour)
@@ -31,11 +31,12 @@ export default ({colour, enabled: enabledProp, onChange, config: {backgroundCSS,
 
   useEffect(keepStill(containerRef), [])
 
-  const touchOn = () => setActive(true)
-  const touchOff = () => setActive(false)
+  const touchOn = () => disabledInteraction ? null : setActive(true)
+  const touchOff = () => disabledInteraction ? null : setActive(false)
 
-  const handleTouch = touchHandler({outerCircleRef, innerCircleRef, handleRef, localColour, setLocalColour, angleToColour, setRealEvent, touchOn, enabled, setEventInfo})
+  const handleTouch = touchHandler({outerCircleRef, innerCircleRef, handleRef, localColour, setLocalColour, angleToColour, setRealEvent, touchOn, enabled, setEventInfo, disabledInteraction})
   const handlePress = event => {
+    if(disabledInteraction) return
     setRealEvent(true)
     setEnabled(!enabled)
   }
@@ -44,7 +45,7 @@ export default ({colour, enabled: enabledProp, onChange, config: {backgroundCSS,
     <>
       <section
        ref={containerRef}
-       className={classnames(container, {[activeStyle]: active, [disabled]: !enabled})}
+       className={classnames(container, {[activeStyle]: active, [disabled]: !enabled, [interactionDisabled]: disabledInteraction})}
        onTouchStart={handleTouch}
        onTouchMove={handleTouch}
        onTouchEnd={touchOff}

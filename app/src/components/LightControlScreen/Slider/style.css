@@ -8,6 +8,11 @@
   border-radius: 1.25rem;
   align-items: center;
   transition: opacity 0.2s cubic-bezier(0.335, 0.880, 0.450, 0.940);
+
+  &.interactionDisabled {
+    filter: brightness(0.5);
+    opacity: 0.5;
+  }
 }
 
 .disabled {

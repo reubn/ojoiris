@@ -9,7 +9,7 @@ import pageVisibilityUpdateState from '../../hooks/pageVisibilityUpdateState'
 
 import HueWheel from './HueWheel'
 import ValueIcon from './ValueIcon'
-
+import ModePicker from './ModePicker'
 import Slider from './Slider'
 
 import colourModes from './colourModes'
@@ -25,7 +25,7 @@ export default () => {
 
   const [localState, setLocalState] = useState(state)
   const [lastOnValue, setLastOnValue] = useState(255)
-  const [mode, setMode] = useState(true)
+  const [mode, setMode] = useState(Object.keys(colourModes)[0])
   const [ignoreAsIsDuplicate, setIgnoreAsIsDuplicate] = useState(true)
 
   // Update on state changes
@@ -79,13 +79,14 @@ export default () => {
 
   return (
     <section className={screen}>
-      <section onClick={() => setMode(!mode)}>Change</section>
-      <HueWheel colour={colour} enabled={localState.enabled} onChange={handleChange} config={colourModes[mode ? 'colour' : 'white']}>
+      {/*<section onClick={() => setMode(Object.keys(colourModes)[(Object.keys(colourModes).indexOf(mode) + 1) % (Object.keys(colourModes).length)])}>Change</section>*/}
+      <ModePicker mode={mode} setMode={setMode} modes={colourModes}/>
+      <HueWheel colour={colour} enabled={localState.enabled} disabledInteraction={!['colour', 'white'].includes(mode)} onChange={handleChange} config={colourModes[mode]}>
         <ValueIcon colour={colour} />
       </HueWheel>
       <span className={sliderGroup}>
-        <Slider property="value" colour={colour} enabled={localState.enabled} onChange={handleChange} style={{background: 'linear-gradient(to right, black, var(--colour))'}}/>
-        <Slider property="saturation" colour={colour} enabled={localState.enabled} onChange={handleChange} style={{background: 'linear-gradient(to right, white, var(--colour))'}}/>
+        <Slider property="value" colour={colour} enabled={localState.enabled} disabledInteraction={!['colour', 'white'].includes(mode)} onChange={handleChange} style={{background: 'linear-gradient(to right, black, var(--colour))'}}/>
+        <Slider property="saturation" colour={colour} enabled={localState.enabled} disabledInteraction={!['colour', 'white'].includes(mode)} onChange={handleChange} style={{background: 'linear-gradient(to right, white, var(--colour))'}}/>
       </span>
     </section>
   )

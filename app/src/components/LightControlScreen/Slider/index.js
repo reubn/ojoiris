@@ -10,10 +10,10 @@ import syncPropsToState from './syncPropsToState'
 import syncStateToOnChange from './syncStateToOnChange'
 import syncStateToHandle from './syncStateToHandle'
 
-import {container, handle, active as activeStyle, disabled} from './style'
+import {container, handle, active as activeStyle, disabled, interactionDisabled} from './style'
 
 
-export default ({colour, enabled=false, onChange, setBeingTouched, property, style}) => {
+export default ({colour, disabledInteraction, enabled=false, onChange, setBeingTouched, property, style}) => {
   const containerRef = useRef(), handleRef = useRef()
 
   const [value, setValue] = useState(colour.value / 255)
@@ -28,10 +28,10 @@ export default ({colour, enabled=false, onChange, setBeingTouched, property, sty
 
   useEffect(keepStill(containerRef), [])
 
-  const touchOn = () => setActive(true)
-  const touchOff = () => setActive(false)
+  const touchOn = () => disabledInteraction ? null : setActive(true)
+  const touchOff = () => disabledInteraction ? null : setActive(false)
 
-  const handleTouch = touchHandler({containerRef, handleRef, setValue, setRealEvent, touchOn})
+  const handleTouch = touchHandler({containerRef, handleRef, setValue, setRealEvent, touchOn, disabledInteraction})
 
   return (
     <section
@@ -41,7 +41,7 @@ export default ({colour, enabled=false, onChange, setBeingTouched, property, sty
        '--colour': colourToCSS({...colour, [property]: 255}),
        '--handle-colour': colourToCSS(colour)
      }}
-     className={classnames(container, {[activeStyle]: active, [disabled]: !enabled})}
+     className={classnames(container, {[activeStyle]: active, [disabled]: !enabled, [interactionDisabled]: disabledInteraction})}
      onTouchStart={handleTouch}
      onTouchMove={handleTouch}
      onTouchEnd={touchOff}
