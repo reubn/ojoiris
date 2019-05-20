@@ -17,7 +17,7 @@ const config = {
   mode: devMode ? 'development' : 'production',
   entry: ['@babel/polyfill', './src'],
   output: {
-    path: resolve(__dirname, 'build'),
+    path: resolve('./build'),
     filename: '[chunkhash].js',
     libraryTarget: 'umd'
   },
