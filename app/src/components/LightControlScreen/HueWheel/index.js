@@ -36,7 +36,6 @@ export default ({colour, disabledInteraction, enabled: enabledProp, onChange, co
 
   const handleTouch = touchHandler({outerCircleRef, innerCircleRef, handleRef, localColour, setLocalColour, angleToColour, setRealEvent, touchOn, enabled, setEventInfo, disabledInteraction})
   const handlePress = event => {
-    if(disabledInteraction) return
     setRealEvent(true)
     setEnabled(!enabled)
   }

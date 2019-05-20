@@ -7,11 +7,10 @@
   box-shadow: rgba(0, 0, 0, 0.05) 0 0 0.5rem 0;
   border-radius: 1.25rem;
   align-items: center;
-  transition: opacity 0.2s cubic-bezier(0.335, 0.880, 0.450, 0.940);
+  transition: all 0.3s cubic-bezier(0.335, 0.880, 0.450, 0.940), opacity 0.2s cubic-bezier(0.335, 0.880, 0.450, 0.940);
 
   &.interactionDisabled {
-    filter: brightness(0.5);
-    opacity: 0.5;
+    width: 0;
   }
 }
 
@@ -43,6 +42,10 @@
     height: 0px;
     width: 0px;
     transition: height 0.2s cubic-bezier(0.335, 0.880, 0.450, 0.940), left 0.2s cubic-bezier(0.335, 0.880, 0.450, 0.940);
+  }
+
+  .interactionDisabled & {
+    opacity: 0;
   }
 
   &:after {
