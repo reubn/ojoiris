@@ -80,7 +80,7 @@ const config = {
     }),
     new Critters(),
   ],
-  devServer: {
+  devServer: devMode ? {
     publicPath: '/',
     contentBase: './build',
     compress: true,
@@ -89,11 +89,11 @@ const config = {
     port: 443,
     inline: true,
     https: ({
-      key: readFileSync('/Users/reuben/reumac.local+4-key.pem'),
-      cert: readFileSync('/Users/reuben/reumac.local+4.pem'),
-      ca: readFileSync('/Users/reuben/Library/Application Support/mkcert/reubenRootCA.pem'),
+      key: devMode && readFileSync('/Users/reuben/reumac.local+4-key.pem'),
+      cert: devMode && readFileSync('/Users/reuben/reumac.local+4.pem'),
+      ca: devMode && readFileSync('/Users/reuben/Library/Application Support/mkcert/reubenRootCA.pem'),
     })
-  },
+  } : undefined,
   resolve: {
     extensions: ['.wasm', '.mjs', '.js', '.css', '.json']
   }
