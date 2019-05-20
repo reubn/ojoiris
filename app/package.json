@@ -2,9 +2,11 @@
   "name": "ojoiris",
   "version": "0.0.1",
   "description": "",
+  "private": true,
   "main": "./src",
   "scripts": {
-    "start": "node ./webpack"
+    "start": "NODE_ENV=development node ./webpack",
+    "build": "NODE_ENV=production node ./webpack"
   },
   "author": "reuben <reuben.eggar@me.com>",
   "license": "MIT",

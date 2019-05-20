@@ -66,9 +66,16 @@ const config = {
       background: '#090a10',
       title: 'Ojoiris',
       icons: {
+        android: false,
         appleIcon: true,
         appleStartup: true,
-        favicons: true
+        coast: false,
+        favicons: true,
+        firefox: false,
+        opengraph: false,
+        twitter: false,
+        yandex: false,
+        windows: false
       }
     }),
     new Critters(),
