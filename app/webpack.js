@@ -14,7 +14,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 // Ensure Full Errors are Shown
 process.on('unhandledRejection', r => console.error(r))
 
-const devMode = false
+const devMode = process.env.NODE_ENV !== 'production'
 
 const config = {
   mode: devMode ? 'development' : 'production',
@@ -109,7 +109,8 @@ if(devMode) {
   http.createServer(wds.app).listen(80)
 } else {
   webpack(config).run((err, stats) => { // Stats Object
-    console.log(stats.compilation.errors)
+    console.log(Object.keys(stats))
+    console.log(stats.compilation ? Object.keys(stats.compilation) : 'Nah')
     if (err) {
       console.error('errS', err.stack || err);
       if (err.details) {
