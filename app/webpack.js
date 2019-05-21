@@ -120,7 +120,7 @@ if(devMode) {
     const info = stats.toJson();
 
     if (stats.hasErrors()) {
-      console.error('stHe', info.errors);
+      console.error('stHe', info.errors, stats.errors);
     }
 
     if (stats.hasWarnings()) {
