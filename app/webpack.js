@@ -110,8 +110,7 @@ if(devMode) {
 } else {
   try {
   webpack(config).run((err, stats) => { // Stats Object
-    console.log(Object.keys(stats))
-    console.log(stats.compilation ? Object.keys(stats.compilation) : 'Nah')
+    console.log(stats.compilation.errors)
     if (err) {
       console.error('errS', err.stack || err);
       if (err.details) {
