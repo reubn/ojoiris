@@ -6,7 +6,7 @@
   "main": "./src",
   "scripts": {
     "start": "NODE_ENV=development node ./webpack",
-    "build": "NODE_ENV=production node ./webpack"
+    "build": "node ./webpack"
   },
   "author": "reuben <reuben.eggar@me.com>",
   "license": "MIT",

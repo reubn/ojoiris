@@ -14,7 +14,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 // Ensure Full Errors are Shown
 process.on('unhandledRejection', r => console.error(r))
 
-const devMode = process.env.NODE_ENV !== 'production'
+const devMode = false
 
 const config = {
   mode: devMode ? 'development' : 'production',
