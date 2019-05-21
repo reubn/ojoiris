@@ -109,6 +109,7 @@ if(devMode) {
   http.createServer(wds.app).listen(80)
 } else {
   webpack(config).run((err, stats) => { // Stats Object
+    console.log(stats.compilation.errors)
     if (err) {
       console.error('errS', err.stack || err);
       if (err.details) {
