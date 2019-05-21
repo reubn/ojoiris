@@ -108,6 +108,7 @@ if(devMode) {
   wds.listen(443)
   http.createServer(wds.app).listen(80)
 } else {
+  try {
   webpack(config).run((err, stats) => { // Stats Object
     console.log(Object.keys(stats))
     console.log(stats.compilation ? Object.keys(stats.compilation) : 'Nah')
@@ -129,4 +130,5 @@ if(devMode) {
       console.warn('stHW',info.warnings);
     }
 })
+} catch(err){console.log(err)}
 }
