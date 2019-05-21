@@ -110,9 +110,9 @@ if(devMode) {
 } else {
   webpack(config).run((err, stats) => { // Stats Object
     if (err) {
-      console.error(err.stack || err);
+      console.error('errS', err.stack || err);
       if (err.details) {
-        console.error(err.details);
+        console.error('errD', err.details);
       }
       return;
     }
@@ -120,11 +120,11 @@ if(devMode) {
     const info = stats.toJson();
 
     if (stats.hasErrors()) {
-      console.error(info.errors);
+      console.error('stHe', info.errors);
     }
 
     if (stats.hasWarnings()) {
-      console.warn(info.warnings);
+      console.warn('stHW',info.warnings);
     }
 })
 }
