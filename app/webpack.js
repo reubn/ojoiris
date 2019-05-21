@@ -11,6 +11,9 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
+// Ensure Full Errors are Shown
+process.on('unhandledRejection', r => console.error(r))
+
 const devMode = process.env.NODE_ENV !== 'production'
 
 const config = {
