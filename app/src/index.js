@@ -8,4 +8,7 @@ store.dispatch({type: 'LIGHT_ONLINE_CHECK'})
 
 render(<Root store={store} />, document.body)
 
-if(navigator.standalone) document.body.addEventListener('touchstart', e => e.preventDefault(), {passive: false}) // Absorb events that are not handled in app, ie unwanted touches
+document.body.addEventListener('touchstart', event => {
+  if(navigator.standalone) event.preventDefault() // Absorb events that are not handled in app, ie unwanted touches
+  if(event.targetTouches.length === 3) store.dispatch({type: 'HIDDEN_TOOLS'})
+}, {passive: false})
