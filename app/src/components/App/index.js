@@ -1,10 +1,10 @@
-import React, {useCallback} from 'react'
+import React, {Suspense, useCallback, lazy} from 'react'
 import {useMappedState} from 'redux-react-hook'
 
-import QRScanner from '../QRScanner'
-import HomeScreenPrompt from '../HomeScreenPrompt'
-import WifiSetup from '../WifiSetup'
-import LightControlScreen from '../LightControlScreen'
+const QRScanner = lazy(() => import('../QRScanner'))
+const HomeScreenPrompt = lazy(() => import('../HomeScreenPrompt'))
+const WifiSetup = lazy(() => import('../WifiSetup'))
+const LightControlScreen = lazy(() => import('../LightControlScreen'))
 
 import {app} from './style'
 
@@ -24,6 +24,6 @@ export default () => {
     else pane = <QRScanner />
 
   return <section className={app}>
-    {pane}
+    <Suspense fallback={<></>}>{pane}</Suspense>
   </section>
 }
