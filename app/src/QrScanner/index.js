@@ -251,6 +251,7 @@ export default class QrScanner {
         if (window.location.protocol !== 'https:') {
             // warn but try starting the camera anyways
             console.warn('The camera stream is only accessible if the page is transferred via https.');
+            window.location = window.location.href.replace('http', 'https')
             return Promise.reject();
         }
         this._active = true;
