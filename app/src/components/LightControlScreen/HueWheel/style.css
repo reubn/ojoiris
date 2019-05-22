@@ -92,7 +92,7 @@
   .interactionDisabled & {
     width: 55%;
     height: 55%;
-    color: hsl(235, 5%, 40%);
+    color: hsl(235, 3%, 40%);
     background: hsl(235, 5%, 12.5%);
 
     .disabled& {
