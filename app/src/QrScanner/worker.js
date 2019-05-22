@@ -1,4 +1,4 @@
-import jsQR from 'jsQR'
+import jsQR from 'jsqr'
 
 const inversionAttempts = 'dontInvert'
 const grayscaleWeights = {
