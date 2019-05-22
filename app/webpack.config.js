@@ -62,7 +62,7 @@ const config = {
       logo: './src/components/App/logo.png',
       persistentCache: true,
       inject: true,
-      background: '#090a10',
+      background: devMode ? '#fefefe' : '#090a10',
       title: 'Ojoiris',
       icons: {
         android: false,
