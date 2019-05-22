@@ -9,7 +9,7 @@ export default () => (
   <>
   <section className={explination}>
   <h1 className={title}>One Last Thing</h1>
-  <p className={description}>To access your light quickly, add the app to your Home Screen</p>
+  <p className={description}>Ojoiris works best from your Home Screen. Tap to add it</p>
 </section>
   <section className={prompt}>
 
