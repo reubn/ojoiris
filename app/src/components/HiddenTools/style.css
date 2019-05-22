@@ -1,0 +1,47 @@
+.prompt {
+  composes: prompt from "../SetupSlide/style";
+}
+
+.explination {
+  composes: explination from "../SetupSlide/style";
+  background: rgb(125, 217, 100);
+}
+
+.title {
+  composes: title from "../SetupSlide/style";
+  color: #fff;
+}
+
+.description {
+  composes: description from "../SetupSlide/style";
+  color: #fff;
+}
+
+.input {
+  width: 86vw;
+  font-size: 2rem;
+  height: 4rem;
+  background: #ececec;
+  border: none;
+  margin-top: 2rem;
+  border-radius: 10px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+@media print {
+  .svgContainer{
+    width: 100vw;
+    height:100vh;
+    background:#fff;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 10;
+  }
+  svg {
+    width: 50mm;
+    shape-rendering: crispEdges;
+    display: block!important;
+  }
+}
