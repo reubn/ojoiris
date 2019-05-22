@@ -5,8 +5,8 @@
   "private": true,
   "main": "./src",
   "scripts": {
-    "start": "NODE_ENV=development node ./webpack",
-    "build": "NODE_ENV=production node ./webpack"
+    "start": "NODE_ENV=development node ./devServer",
+    "build": "NODE_ENV=production npx webpack"
   },
   "author": "reuben <reuben.eggar@me.com>",
   "license": "MIT",

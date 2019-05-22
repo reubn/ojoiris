@@ -1,9 +1,5 @@
-const http = require('http')
 const {resolve} = require('path')
 const {readFileSync} = require('fs')
-
-const webpack = require('webpack')
-const WebpackDevServer = require('webpack-dev-server')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const Critters = require('critters-webpack-plugin')
@@ -102,32 +98,4 @@ const config = {
   }
 }
 
-if(devMode) {
-  const wds = new WebpackDevServer(webpack(config), config.devServer)
-
-  wds.listen(443)
-  http.createServer(wds.app).listen(80)
-} else {
-  try {
-  webpack(config).run((err, stats) => { // Stats Object
-    console.log(stats.compilation.errors)
-    if (err) {
-      console.error('errS', err.stack || err);
-      if (err.details) {
-        console.error('errD', err.details);
-      }
-      return;
-    }
-
-    const info = stats.toJson();
-
-    if (stats.hasErrors()) {
-      console.error('stHe', info.errors, stats.errors);
-    }
-
-    if (stats.hasWarnings()) {
-      console.warn('stHW',info.warnings);
-    }
-})
-} catch(err){console.log(err)}
-}
+module.exports = config
