@@ -50,34 +50,34 @@ const config = {
 },
   plugins: [
     // new BundleAnalyzerPlugin(),
-    // new HtmlWebpackPlugin({
-    //   title: 'Ojoiris',
-    //   meta: {
-    //     viewport: 'viewport-fit=cover',
-    //     'apple-mobile-web-app-capable': 'yes',
-    //     'apple-mobile-web-app-status-bar-style': 'black-translucent'
-    //   }
-    // }),
-    // new FaviconsWebpackPlugin({
-    //   logo: './src/components/App/logo.png',
-    //   persistentCache: true,
-    //   inject: true,
-    //   background: '#090a10',
-    //   title: 'Ojoiris',
-    //   icons: {
-    //     android: false,
-    //     appleIcon: true,
-    //     appleStartup: true,
-    //     coast: false,
-    //     favicons: true,
-    //     firefox: false,
-    //     opengraph: false,
-    //     twitter: false,
-    //     yandex: false,
-    //     windows: false
-    //   }
-    // }),
-    // new Critters(),
+    new HtmlWebpackPlugin({
+      title: 'Ojoiris',
+      meta: {
+        viewport: 'viewport-fit=cover',
+        'apple-mobile-web-app-capable': 'yes',
+        'apple-mobile-web-app-status-bar-style': 'black-translucent'
+      }
+    }),
+    new FaviconsWebpackPlugin({
+      logo: './src/components/App/logo.png',
+      persistentCache: true,
+      inject: true,
+      background: '#090a10',
+      title: 'Ojoiris',
+      icons: {
+        android: false,
+        appleIcon: true,
+        appleStartup: true,
+        coast: false,
+        favicons: true,
+        firefox: false,
+        opengraph: false,
+        twitter: false,
+        yandex: false,
+        windows: false
+      }
+    }),
+    new Critters(),
   ],
   devServer: devMode ? {
     publicPath: '/',
