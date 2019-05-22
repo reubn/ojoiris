@@ -3,10 +3,13 @@
   "version": "0.0.1",
   "description": "",
   "private": true,
+  "homepage": "ojoiris.reuben.science",
   "main": "./src",
   "scripts": {
     "start": "NODE_ENV=development node ./devServer",
-    "build": "NODE_ENV=production npx webpack"
+    "build": "NODE_ENV=production npx webpack",
+    "push": "sh -c 'node -pe \"require(\\`./package.json\\`).homepage\" > ./build/CNAME' && gh-pages -m '🎉' -d build",
+    "deploy": "npm run-script build && npm run-script push"
   },
   "author": "reuben <reuben.eggar@me.com>",
   "license": "MIT",
@@ -43,5 +46,8 @@
     "react-dom": "^16.8.6",
     "redux": "^4.0.1",
     "redux-react-hook": "^3.3.1"
+  },
+  "devDependencies": {
+    "gh-pages": "^2.0.1"
   }
 }
