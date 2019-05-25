@@ -29,6 +29,11 @@
   padding-right: 2rem;
 }
 
+.svgContainer {
+  margin-top: 3rem;
+  width: 80vw;
+}
+
 @media print {
   .svgContainer{
     width: 100vw;

@@ -5,7 +5,7 @@ import getRandomMetadata from './getRandomMetadata'
 import {title, explination, description, prompt, svgContainer, input} from './style'
 
 export default () => {
-  const [metadata, setMetadata] = useState(getRandomMetadata())
+  const [metadata, setMetadata] = useState(getRandomMetadata({}))
   const {d, viewBox} = qrGenerate(metadata)
 
   const inputRefs = Array(4).fill().map(() => useRef())
@@ -17,6 +17,11 @@ export default () => {
     return () => inputRefs.forEach(({current: element}) => element.removeEventListener('touchstart', handler))
   }, [])
 
+  const changeHandler = event => {
+    const key = event.target.placeholder.toLowerCase()
+    const value = event.target.value
+    setMetadata({...metadata, [key]: value})
+  }
 
   return (
   <>
@@ -25,16 +30,14 @@ export default () => {
       <p className={description}>Hidden Tools</p>
     </section>
     <section className={prompt}>
-      <section className={0}>
-        <input type="text" ref={inputRefs[0]} className={input} onChange={e => setMetadata({...metadata, [e.target.placeholder.toLowerCase()]: e.target.value})} value={metadata.id} placeholder="ID" />
-        <input type="text" ref={inputRefs[1]} className={input} onChange={e => setMetadata({...metadata, [e.target.placeholder.toLowerCase()]: e.target.value})} value={metadata.key} placeholder="Key" />
-        <input type="text" ref={inputRefs[2]} className={input} onChange={e => setMetadata({...metadata, [e.target.placeholder.toLowerCase()]: e.target.value})} value={metadata.password} placeholder="Password" />
-        <input type="text" ref={inputRefs[3]} className={input} onChange={e => setMetadata({...metadata, [e.target.placeholder.toLowerCase()]: e.target.value})} value={metadata.mac} placeholder="MAC" />
+        <input type="text" ref={inputRefs[0]} className={input} onChange={changeHandler} value={metadata.id} placeholder="ID" />
+        <input type="text" ref={inputRefs[1]} className={input} onChange={changeHandler} value={metadata.key} placeholder="Key" />
+        <input type="text" ref={inputRefs[2]} className={input} onChange={changeHandler} value={metadata.password} placeholder="Password" />
+        <input type="text" ref={inputRefs[3]} className={input} onChange={changeHandler} value={metadata.mac} placeholder="MAC" />
         <section className={svgContainer}>
-          <svg viewBox={viewBox} onTouchStart={() => setMetadata(getRandomMetadata())}>
+          <svg viewBox={viewBox} onTouchStart={() => setMetadata(getRandomMetadata(metadata))}>
           <path d={d} />
           </svg>
-        </section>
       </section>
     </section>
   </>
