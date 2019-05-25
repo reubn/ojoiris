@@ -6,6 +6,7 @@ import rgb2hsv from 'pure-color/convert/rgb2hsv'
 import rgb2hsl from 'pure-color/convert/rgb2hsl'
 
 import Breathe from './icons/Breathe'
+import Rainbow from './icons/Rainbow'
 import Colour from './icons/Colour'
 import White from './icons/White'
 
@@ -14,6 +15,11 @@ export default {
     showControls: false,
     show: 0,
     Icon: Breathe
+  },
+  rainbow: {
+    showControls: false,
+    show: 3,
+    Icon: Rainbow
   },
   colour: {
     showControls: true,

@@ -134,7 +134,13 @@ void initialiseWifi(ConfigurableSettings& settings, std::function<void()>& saveC
 
     if(server.hasArg("show")){
       int arg = atoi(server.arg("show").c_str());
-      if (shows.find(arg) != shows.end()) settings.showId = arg;
+      if(shows.find(arg) != shows.end()) settings.showId = arg;
+      changed = true;
+    }
+
+    if(server.hasArg("showMode")){
+      int arg = atoi(server.arg("showMode").c_str());
+      settings.showMode = arg;
       changed = true;
     }
 
@@ -182,6 +188,7 @@ void initialiseWifi(ConfigurableSettings& settings, std::function<void()>& saveC
       "saturation " + String(settings.saturation) + "\n" +
       "hue " + String(settings.hue) + "\n" +
       "show " + String(settings.showId) + "\n" +
+      "showMode " + String(settings.showMode) + "\n" +
       "brightness " + String(settings.globalBrightness) + "\n" +
       "enabled " + String(settings.enabled) + "\n";
 

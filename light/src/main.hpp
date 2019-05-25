@@ -3,6 +3,7 @@ struct ConfigurableSettings {
   int globalBrightness = 255;
 
   int showId = 0;
+  int showMode = 0;
 
   int hue = 16;
   int saturation = 255;
