@@ -13,7 +13,7 @@ function randomMac() {
     [0x00, 0x03, 0xFF], // Microsoft Hyper-V, Virtual Server, Virtual PC
     [0x00, 0x1C, 0x42], // Parallels
     [0x00, 0x0F, 0x4B], // Virtual Iron 4
-    [0x08, 0x00, 0x27] // Sun Virtual Box
+    [0x08, 0x00, 0x27]  // Sun Virtual Box
   ]
 
   const [A,B,C] = vendors[Math.floor(Math.random() * (vendors.length - 1))]
