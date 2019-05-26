@@ -3,7 +3,7 @@ import qrcode from 'qrcode'
 const alignSymbol = [[1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 0, 1, 0, 1], [1, 0, 0, 0, 1], [1, 1, 1, 1, 1]]
 
 export default ({id, password, key, mac}, rectSize=10) => {
-  const {modules: {size, data}} = qrcode.create(`WIFI:S:Ojoiris-${id}T:WPAP:${password};;${key},${mac}`, {version: 8})
+  const {modules: {size, data}} = qrcode.create(`WIFI:S:Ojoiris-${id};T:WPA;P:${password};;${key},${mac}`, {version: 8})
 
   const circleDiameter = 92
   const circleRadius = circleDiameter / 2
