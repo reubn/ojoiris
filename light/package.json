@@ -1,0 +1,13 @@
+{
+  "name": "light",
+  "version": "1.0.0",
+  "description": "",
+  "main": "configure.js",
+  "scripts": {
+    "configure": "node configure.js",
+    "build": "./build.sh",
+    "start": "npm run-script configure && npm run-script build"
+  },
+  "author": "",
+  "license": "MIT"
+}
