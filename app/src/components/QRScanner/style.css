@@ -13,8 +13,8 @@
 .overlay:after {
   display: block;
   border-radius: 50%;
-  width: 65vw;
-  height: 65vw;
+  width: 65vmin;
+  height: 65vmin;
   border: 2px solid rgba(255,255,255,0.5);
   content: "";
   position: absolute;
@@ -44,21 +44,21 @@
 
 @keyframes pulseScanning {
   0% {
-      width: 65vw;
-      height: 65vw;
+      width: 65vmin;
+      height: 65vmin;
       box-shadow: 0 0 0 0 rgba(255, 200, 0, 0.2), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
   }
   25% {
       box-shadow: 0 0 0 15px rgba(255, 200, 0, 0.3), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
   }
   50% {
-      width: 65vw;
-      height: 65vw;
+      width: 65vmin;
+      height: 65vmin;
       box-shadow: 0 0 0 15px rgba(255, 200, 0, 0), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
   }
   75% {
-      width: 75vw;
-      height: 75vw;
+      width: 75vmin;
+      height: 75vmin;
   }
   100% {
       box-shadow: 0 0 0 0 rgba(255, 200, 0, 0), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
@@ -67,21 +67,21 @@
 
 @keyframes pulseFail {
   0% {
-      width: 65vw;
-      height: 65vw;
+      width: 65vmin;
+      height: 65vmin;
       box-shadow: 0 0 0 0 rgba(255, 10, 0, 0.2), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
   }
   25% {
       box-shadow: 0 0 0 15px rgba(255, 10, 0, 0.3), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
   }
   50% {
-      width: 65vw;
-      height: 65vw;
+      width: 65vmin;
+      height: 65vmin;
       box-shadow: 0 0 0 15px rgba(255, 10, 0, 0), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
   }
   75% {
-      width: 75vw;
-      height: 75vw;
+      width: 75vmin;
+      height: 75vmin;
   }
   100% {
       box-shadow: 0 0 0 0 rgba(255, 10, 0, 0), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
@@ -90,21 +90,21 @@
 
 @keyframes pulseSuccess {
   0% {
-      width: 65vw;
-      height: 65vw;
+      width: 65vmin;
+      height: 65vmin;
       box-shadow: 0 0 0 0 rgba(0, 255, 10, 0.2), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
   }
   25% {
       box-shadow: 0 0 0 15px rgba(0, 255, 10, 0.3), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
   }
   50% {
-      width: 65vw;
-      height: 65vw;
+      width: 65vmin;
+      height: 65vmin;
       box-shadow: 0 0 0 15px rgba(0, 255, 10, 0), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
   }
   75% {
-      width: 75vw;
-      height: 75vw;
+      width: 75vmin;
+      height: 75vmin;
   }
   100% {
       box-shadow: 0 0 0 0 rgba(0, 255, 10, 0), rgba(0, 0, 0, 0.2) 0 0 0 2000px;

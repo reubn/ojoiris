@@ -18,7 +18,7 @@
 }
 
 .input {
-  width: 86vw;
+  width: 86vmin;
   font-size: 2rem;
   height: 4rem;
   background: #ececec;
@@ -31,12 +31,12 @@
 
 .svgContainer {
   margin-top: 3rem;
-  width: 80vw;
+  width: 80vmin;
 }
 
 @media print {
   .svgContainer{
-    width: 100vw;
+    width: 100vmin;
     height:100vh;
     background:#fff;
     position: absolute;
