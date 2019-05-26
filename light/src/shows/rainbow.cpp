@@ -25,6 +25,7 @@ void loopRainbow(ConfigurableSettings& settings){
     static boolean blanked = false;
 
     if(settings.enabled) {
+      brightness = maxBrightness;
       LEDS.setBrightness(settings.globalBrightness);
       int adjustedBrightness = dim8_lin(min(maxBrightness, max(minBrightness, int(round(brightness)))));
 
