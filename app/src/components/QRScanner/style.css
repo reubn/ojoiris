@@ -33,7 +33,6 @@
   font-family: 'SF Pro Text', -apple-system, 'BlinkMacSystemFont';
   text-align: center;
   color: #fff;
-  text-shadow: rgba(0, 0, 0, 0.2) 0 0 10px;
 }
 
 .video {
@@ -45,45 +44,69 @@
 
 @keyframes pulseScanning {
   0% {
-    box-shadow: 0 0 0 0 rgba(255, 200, 0, 0.2);
+      width: 65vw;
+      height: 65vw;
+      box-shadow: 0 0 0 0 rgba(255, 200, 0, 0.2), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
   }
   25% {
-      box-shadow: 0 0 0 15px rgba(255, 200, 0, 0.3);
+      box-shadow: 0 0 0 15px rgba(255, 200, 0, 0.3), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
   }
   50% {
-      box-shadow: 0 0 0 15px rgba(255, 200, 0, 0);
+      width: 65vw;
+      height: 65vw;
+      box-shadow: 0 0 0 15px rgba(255, 200, 0, 0), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
+  }
+  75% {
+      width: 75vw;
+      height: 75vw;
   }
   100% {
-      box-shadow: 0 0 0 0 rgba(255, 200, 0, 0);
+      box-shadow: 0 0 0 0 rgba(255, 200, 0, 0), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
   }
 }
 
 @keyframes pulseFail {
   0% {
-    box-shadow: 0 0 0 0 rgba(255, 10, 0, 0.2);
+      width: 65vw;
+      height: 65vw;
+      box-shadow: 0 0 0 0 rgba(255, 10, 0, 0.2), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
   }
   25% {
-      box-shadow: 0 0 0 15px rgba(255, 10, 0, 0.3);
+      box-shadow: 0 0 0 15px rgba(255, 10, 0, 0.3), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
   }
   50% {
-      box-shadow: 0 0 0 15px rgba(255, 10, 0, 0);
+      width: 65vw;
+      height: 65vw;
+      box-shadow: 0 0 0 15px rgba(255, 10, 0, 0), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
+  }
+  75% {
+      width: 75vw;
+      height: 75vw;
   }
   100% {
-      box-shadow: 0 0 0 0 rgba(255, 10, 0, 0);
+      box-shadow: 0 0 0 0 rgba(255, 10, 0, 0), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
   }
 }
 
 @keyframes pulseSuccess {
   0% {
-    box-shadow: 0 0 0 0 rgba(0, 255, 10, 0.2);
+      width: 65vw;
+      height: 65vw;
+      box-shadow: 0 0 0 0 rgba(0, 255, 10, 0.2), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
   }
   25% {
-      box-shadow: 0 0 0 15px rgba(0, 255, 10, 0.3);
+      box-shadow: 0 0 0 15px rgba(0, 255, 10, 0.3), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
   }
   50% {
-      box-shadow: 0 0 0 15px rgba(0, 255, 10, 0);
+      width: 65vw;
+      height: 65vw;
+      box-shadow: 0 0 0 15px rgba(0, 255, 10, 0), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
+  }
+  75% {
+      width: 75vw;
+      height: 75vw;
   }
   100% {
-      box-shadow: 0 0 0 0 rgba(0, 255, 10, 0);
+      box-shadow: 0 0 0 0 rgba(0, 255, 10, 0), rgba(0, 0, 0, 0.2) 0 0 0 2000px;
   }
 }
