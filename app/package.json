@@ -9,7 +9,8 @@
     "start": "NODE_ENV=development node ./devServer",
     "build": "NODE_ENV=production npx webpack",
     "push": "sh -c 'node -pe \"require(\\`./package.json\\`).homepage\" > ./build/CNAME' && gh-pages -m '🎉' -d build",
-    "deploy": "npm run-script build && npm run-script push"
+    "deploy": "npm run-script build && npm run-script push",
+    "info": "wc -l $(git ls-files | grep -v 'package-lock')"
   },
   "author": "reuben <reuben.eggar@me.com>",
   "license": "MIT",
