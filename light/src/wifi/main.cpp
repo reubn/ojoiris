@@ -3,6 +3,7 @@
 #include <functional>
 
 #include <Arduino.h>
+#include <ESP8266WiFi.h>
 #include <WiFiManager.h> // https://github.com/tzapu/WiFiManager
 #include <ESP8266mDNS.h>
 #include <ESP8266WebServer.h>
@@ -204,4 +205,6 @@ void loopWifi(){
   wm.process();
   MDNS.update();
   server.handleClient();
+
+  if(WiFi.status() == WL_CONNECTED) WiFi.mode(WIFI_STA);
 }
