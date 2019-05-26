@@ -75,6 +75,7 @@ void initialiseWifi(ConfigurableSettings& settings, std::function<void()>& saveC
   uint8* mac = hexstr_to_char(MAC_ADDR);
   if(wifi_set_macaddr(STATION_IF, mac)) Serial.println("MAC Address Changed: " MAC_ADDR);
 
+  wm.setCustomHeadElement("<style>body{background:#090910;color:#ececec!important;font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'SF Pro Text'}.msg,form[action*=exit],form[action*=info],h3{display:none}button,input[type=button],input[type=submit]{cursor:pointer;border:0;background-color:#ffb400;border:none;border-radius:2px;color:#fff;line-height:2.4rem;font-size:1.2rem;width:100%}.wrap{position:absolute;top:0;left:0;width:100vw;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center}form{width:80%}h1{font-weight:200}h1:after{content:\"Connect your light to Wifi\";display:block;font-size:1rem;opacity:.8}a{color:#ececec;font-weight:200}a:hover{color:#ff0084;text-decoration:none!important;font-weight:400}.q:after{display:none;}.q:before{content:\"Secure\";background:0 0!important;color:#ffb400;font-size:.8rem}#p,#s{border:none;height:2.5rem;padding-left:1rem;border-radius:2px}.wrap>div:first-child:before{content:\"Select a Network or Enter Your Own\";font-size:1.25rem;font-weight:300;position:absolute;top:3rem;width:100vw;left:50%;transform:translateX(-50%);display:block;text-align:center;}</style>");
   wm.setConfigPortalBlocking(false);
   if(wm.autoConnect(WIFI_SSID, WIFI_PASS)) Serial.println("WiFi Connection Established");
 
