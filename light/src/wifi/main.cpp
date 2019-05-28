@@ -205,6 +205,4 @@ void loopWifi(){
   wm.process();
   MDNS.update();
   server.handleClient();
-
-  if(WiFi.status() == WL_CONNECTED) WiFi.mode(WIFI_STA);
 }
