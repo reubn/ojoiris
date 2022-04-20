@@ -12,7 +12,7 @@
     "deploy": "npm run-script build && npm run-script push",
     "info": "wc -l $(git ls-files | grep -v 'package-lock')"
   },
-  "author": "reuben <reuben.eggar@me.com>",
+  "author": "reuben",
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.4.3",
